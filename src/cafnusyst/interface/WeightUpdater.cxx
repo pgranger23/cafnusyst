@@ -77,10 +77,27 @@ void WeightUpdater::ProcessFile(std::string inputfile){
   fReweightResourceAcc.SetEnabled(DoMonitor);
 
   TFile *f_input = TFile::Open(inputfile.c_str());
+  if(!f_input || f_input->IsZombie()){
+    fprintf(stderr, "[ERROR] Could not open input file %s\n", inputfile.c_str());
+    abort();
+  }
+
+  // Auto-detect base directory if not explicitly specified
+  if(fBaseDirName == ""){
+    if(!f_input->Get(fCAFTreeName.c_str())){
+      if(f_input->GetDirectory("cafmaker") && f_input->Get(("cafmaker/" + fCAFTreeName).c_str())){
+        printf("[WeightUpdater::ProcessFile] Auto-detected input trees inside 'cafmaker/' directory\n");
+        fBaseDirName = "cafmaker/";
+      }
+    }
+  }
 
   // CAF tree
-
   TTree *fInputCAFTree = (TTree *)f_input->Get( (fBaseDirName+fCAFTreeName).c_str());
+  if(!fInputCAFTree){
+    fprintf(stderr, "[ERROR] Could not find CAF tree '%s' in %s\n", (fBaseDirName+fCAFTreeName).c_str(), inputfile.c_str());
+    abort();
+  }
   size_t ThisNCAFEvents = fInputCAFTree->GetEntries();
 
   printf("[WeightUpdater::ProcessFile] Total number of events (CAF entries) in this file = %ld\n", ThisNCAFEvents);
@@ -132,6 +149,10 @@ void WeightUpdater::ProcessFile(std::string inputfile){
 
   // - GENIE tree
   TTree *fInputGENIETree = (TTree *)f_input->Get( (fBaseDirName+fGENIETreeName).c_str() );
+  if(!fInputGENIETree){
+    fprintf(stderr, "[ERROR] Could not find GENIE tree '%s' in %s\n", (fBaseDirName+fGENIETreeName).c_str(), inputfile.c_str());
+    abort();
+  }
   genie::NtpMCEventRecord *fInputGENIENtp = nullptr;
   fInputGENIETree->SetBranchAddress(fGENIERecName.c_str(), &fInputGENIENtp);
   size_t ThisNGENIEEvents = fInputGENIETree->GetEntries();
@@ -212,15 +233,17 @@ void WeightUpdater::ProcessFile(std::string inputfile){
       // Evaluate reweights
       fReweightResourceAcc.Start();
       systtools::event_unit_response_w_cv_t resp = fRH->GetEventVariationAndCVResponse(GenieGHep);
-      if(resp.size() != NExpectedWeights){
-        printf("[WeightUpdater::ProcessFile] resp.size() = %zu but NExpectedWeights = %u\n", resp.size(), NExpectedWeights);
-        abort();
-      }
 
       if(DoDebug){
-        printf("[WeightUpdater::ProcessFile]     - => done.\n");
-        printf("[WeightUpdater::ProcessFile]     - Current number size of xsec_systs = %ld\n", outNu.xsec_systs.size());
+        printf("[WeightUpdater::ProcessFile]     - => done. resp.size() = %zu, expected = %u\n", resp.size(), NExpectedWeights);
+        printf("[WeightUpdater::ProcessFile]     - Current size of xsec_systs = %ld\n", outNu.xsec_systs.size());
         printf("[WeightUpdater::ProcessFile]     - Now updating weights\n");
+      }
+
+      // Map evaluated responses by PID
+      std::map<systtools::paramId_t, std::vector<double>> resp_map;
+      for (const auto& v : resp) {
+        resp_map[v.pid] = v.responses;
       }
 
       // It is possible that we are processing multiple input CAFs
@@ -230,34 +253,31 @@ void WeightUpdater::ProcessFile(std::string inputfile){
       if(!fWeightsOnly){
         outNu.genieIdx = GlobalGENIEEventCounter;
       }
-      for(const auto& v: resp){
-        const systtools::paramId_t& pid = v.pid;
-        const double& CVw = v.CV_response;
-        const std::vector<double>& ws = v.responses;
 
+      for(systtools::paramId_t pid : fRH->GetParameters()) {
         systtools::SystParamHeader const &sph = fRH->GetHeader( pid );
-        if(DoDebug){
-          printf("[WeightUpdater::ProcessFile]     - Param name = %s\n", sph.prettyName.c_str());
-          printf("[WeightUpdater::ProcessFile]       - ParamID = %u\n", pid);
-        }
         if(sph.isResponselessParam){
           if(DoDebug){
-            printf("[WeightUpdater::ProcessFile]       - Responsless parameter, so skipping\n");
+            printf("[WeightUpdater::ProcessFile]       - Responseless parameter, skipping\n");
           }
           continue;
         }
 
-        // Upated record (caf::StandardRecord),
-        // convert this into FlatRecord using flat::Flat::Fill(const T& x)
         outNu.xsec_systs.emplace_back();
-        for(const auto& w: ws){
-          if(DoDebug){
-            printf("[WeightUpdater::ProcessFile]       - w =  = %f\n", w);
+        auto it = resp_map.find(pid);
+        if (it != resp_map.end()) {
+          for(const auto& w: it->second){
+            outNu.xsec_systs.back().weights.push_back(w);
           }
-          outNu.xsec_systs.back().weights.push_back(w);
+        } else {
+          // If dial did not apply to this interaction mode (e.g. MEC on CCQE),
+          // assign nominal weight 1.0 across all variations.
+          size_t nVars = sph.isCorrection ? 1 : sph.paramVariations.size();
+          for(size_t iv = 0; iv < nVars; ++iv){
+            outNu.xsec_systs.back().weights.push_back(1.0);
+          }
         }
-
-      } // END resp loop
+      } // END param loop
       fReweightResourceAcc.Stop();
 
       // Also fill output GENIE tree (not emitted in weights-only mode)

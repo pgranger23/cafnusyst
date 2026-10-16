@@ -1,0 +1,213 @@
+#!/bin/bash
+# ==============================================================================
+# cafnusyst_justin.jobscript
+#
+# Worker script for running cafnusyst systematic reweighting.
+# Can be run:
+#   - By justIN on grid workers (fetches files via justin-get-file)
+#   - Standalone / interactively: ./cafnusyst_justin.jobscript <input_file.root>
+# Produces both .cafnusyst.flat.root and .cafnusyst.nested.root outputs.
+# ==============================================================================
+set -o pipefail
+
+echo "Starting cafnusyst jobscript on $(hostname) at $(date)"
+echo "Processors: ${JUSTIN_PROCESSORS:-1}, Walltime: ${JUSTIN_WALL_SECONDS:-unknown}s"
+echo "Workflow: ${JUSTIN_WORKFLOW_ID:-none}, Stage: ${JUSTIN_STAGE_ID:-none}"
+
+JOB_DIR="${PWD}"
+
+# Cleanup scratch on exit
+cleanup() {
+    rm -f "${LOCAL_INPUT:-}" input_cafs.txt
+    rm -rf "${WORKDIR:-}" "${JOB_DIR}/genie_work_"* "${TMPDIR:-/tmp}/genie_work_${USER:-user}_"*
+}
+trap cleanup EXIT
+
+# Helper to fetch a file from URL, dCache/PNFS, or local filesystem
+fetch_file() {
+    local src="$1"
+    local dest="$2"
+
+    if [[ "$src" == root://* ]]; then
+        xrdcp -f -s "$src" "$dest"
+    elif [[ "$src" == http* ]]; then
+        curl -sSL "$src" -o "$dest"
+    elif [[ "$src" == /pnfs/* ]]; then
+        if command -v ifdh &>/dev/null; then
+            ifdh cp "$src" "$dest" || cp "$src" "$dest"
+        else
+            cp "$src" "$dest"
+        fi
+    else
+        ln -sfn "$src" "$dest" 2>/dev/null || cp "$src" "$dest"
+    fi
+}
+
+# ------------------------------------------------------------------------------
+# 1. Unpack and configure software package
+# ------------------------------------------------------------------------------
+if [ -f "./setup_runtime.sh" ]; then
+    echo "Using existing package in current directory"
+elif [ -f "${JOB_DIR}/cafnusyst_package.tar.gz" ]; then
+    tar -xzf "${JOB_DIR}/cafnusyst_package.tar.gz"
+elif [ -n "$PACKAGE_TARBALL_URL" ]; then
+    echo "Fetching package from ${PACKAGE_TARBALL_URL}..."
+    fetch_file "$PACKAGE_TARBALL_URL" ./pkg.tar.gz
+    tar -xzf ./pkg.tar.gz && rm -f ./pkg.tar.gz
+else
+    echo "ERROR: No cafnusyst package found. Please set PACKAGE_TARBALL_URL."
+    exit 1
+fi
+
+if [ ! -f "./setup_runtime.sh" ]; then
+    echo "ERROR: setup_runtime.sh not found after unpacking package"
+    exit 2
+fi
+source "./setup_runtime.sh"
+
+# ------------------------------------------------------------------------------
+# 2. Locate configuration FHiCL
+# ------------------------------------------------------------------------------
+FCL_TARGET="${CAFNUSYST_FCL:-systs_atmospherics_v2.fcl}"
+FCL=""
+
+# Remote URL or PNFS path
+if [[ "$FCL_TARGET" == root://* ]] || [[ "$FCL_TARGET" == http* ]] || [[ "$FCL_TARGET" == /pnfs/* ]]; then
+    LOCAL_FCL="./$(basename "$FCL_TARGET")"
+    echo "Fetching remote FHiCL from $FCL_TARGET..."
+    fetch_file "$FCL_TARGET" "$LOCAL_FCL"
+    [ -f "$LOCAL_FCL" ] && FCL="$LOCAL_FCL"
+fi
+
+# Search current directory, ./fcl, and package base directory
+if [ -z "$FCL" ]; then
+    FCL_BASE="$(basename "$FCL_TARGET")"
+    for dir in "." "./fcl" "${BASE_DIR}/fcl"; do
+        if [ -f "${dir}/${FCL_BASE}" ]; then
+            FCL="${dir}/${FCL_BASE}"
+            break
+        fi
+    done
+fi
+
+# Fallback to FHICL_FILE_PATH search
+if [ -z "$FCL" ] && [ -n "$FHICL_FILE_PATH" ]; then
+    IFS=':' read -ra DIRS <<< "$FHICL_FILE_PATH"
+    for d in "${DIRS[@]}"; do
+        if [ -f "${d}/$(basename "$FCL_TARGET")" ]; then
+            FCL="${d}/$(basename "$FCL_TARGET")"
+            break
+        fi
+    done
+fi
+
+if [ -z "$FCL" ] || [ ! -f "$FCL" ]; then
+    echo "ERROR: FHiCL configuration '${FCL_TARGET}' not found!"
+    exit 3
+fi
+echo "Using FHiCL: $FCL"
+
+# ------------------------------------------------------------------------------
+# 3. Process CAF File(s)
+# ------------------------------------------------------------------------------
+process_file() {
+    local file_pfn="$1"
+    local file_did="${2:-$1}"
+
+    echo "--- Processing: $file_did ---"
+
+    LOCAL_INPUT="${JOB_DIR}/input_$$.root"
+    fetch_file "$file_pfn" "$LOCAL_INPUT"
+
+    if [ ! -f "$LOCAL_INPUT" ]; then
+        echo "ERROR: Failed to stage $file_pfn"
+        return 4
+    fi
+
+    echo "$LOCAL_INPUT" > input_cafs.txt
+
+    OUTBASE="$(basename "$file_pfn" .root)"
+    FLAT_OUT="${OUTBASE}.cafnusyst.flat.root"
+    NESTED_OUT="${OUTBASE}.cafnusyst.nested.root"
+
+    EXTRA_ARGS=()
+    if [ -n "$MAX_EVENTS" ] && [ "$MAX_EVENTS" -gt 0 ]; then
+        EXTRA_ARGS+=("-N" "$MAX_EVENTS")
+    fi
+
+    echo "Running UpdateReweight on $(basename "$file_pfn")..."
+    UpdateReweight -c "$FCL" -i input_cafs.txt -o "$OUTBASE" --make_nested --monitor "${EXTRA_ARGS[@]}"
+    local status=$?
+
+    if [ $status -ne 0 ]; then
+        echo "ERROR: UpdateReweight failed (code $status) on $file_did"
+        return $status
+    fi
+
+    if [ ! -f "$FLAT_OUT" ]; then
+        echo "ERROR: Expected output $FLAT_OUT missing"
+        return 5
+    fi
+
+    echo "Output flat:   $FLAT_OUT ($(du -sh "$FLAT_OUT" | cut -f1))"
+    [ -f "$NESTED_OUT" ] && echo "Output nested: $NESTED_OUT ($(du -sh "$NESTED_OUT" | cut -f1))"
+
+    echo "$file_pfn" >> justin-processed-pfns.txt
+    echo "$file_did" >> justin-processed-dids.txt
+
+    rm -f "$LOCAL_INPUT" input_cafs.txt
+    return 0
+}
+
+# Mode A: Direct input file passed as command-line argument or via $INPUT_FILE
+DIRECT_INPUT="${1:-${INPUT_FILE:-}}"
+
+if [ -n "$DIRECT_INPUT" ]; then
+    echo "Running in direct mode on input: $DIRECT_INPUT"
+    process_file "$DIRECT_INPUT" "$DIRECT_INPUT"
+    EXIT_CODE=$?
+    echo "Finished at $(date) with code $EXIT_CODE"
+    exit $EXIT_CODE
+fi
+
+# Mode B: justIN workflow allocator loop
+if [ -n "$JUSTIN_PATH" ] && [ -x "$JUSTIN_PATH/justin-get-file" ]; then
+    GET_FILE_CMD="$JUSTIN_PATH/justin-get-file"
+elif command -v justin-get-file &>/dev/null; then
+    GET_FILE_CMD="justin-get-file"
+else
+    echo "ERROR: justin-get-file not found and no direct input file provided"
+    exit 1
+fi
+
+FILES_PER_JOB="${FILES_PER_JOB:-1}"
+echo "Files per job limit: ${FILES_PER_JOB} (0 = unlimited)"
+
+N_PROCESSED=0
+
+while true; do
+    if [ "$FILES_PER_JOB" -gt 0 ] && [ "$N_PROCESSED" -ge "$FILES_PER_JOB" ]; then
+        echo "Job reached limit of ${FILES_PER_JOB} file(s). Exiting."
+        break
+    fi
+
+    DID_PFN_RSE=$($GET_FILE_CMD)
+    if [ -z "$DID_PFN_RSE" ]; then
+        echo "No more input files allocated."
+        break
+    fi
+
+    FILE_DID=$(echo "$DID_PFN_RSE" | cut -f1 -d' ')
+    FILE_PFN=$(echo "$DID_PFN_RSE" | cut -f2 -d' ')
+    RSE=$(echo "$DID_PFN_RSE" | cut -f3 -d' ')
+
+    echo "=== Allocated file $((N_PROCESSED + 1)): $FILE_DID ($RSE) ==="
+    process_file "$FILE_PFN" "$FILE_DID"
+    STATUS=$?
+    [ $STATUS -ne 0 ] && exit $STATUS
+
+    N_PROCESSED=$((N_PROCESSED + 1))
+done
+
+echo "Finished successfully at $(date). Processed $N_PROCESSED file(s)."
+exit 0

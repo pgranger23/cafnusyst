@@ -1,0 +1,19 @@
+# Build and install artifacts
+build/
+build_test/
+install/
+
+# justIN package and grid artifacts
+justin/package/
+justin/cafnusyst_package.tar.gz
+justin/genie_work_*
+justin/.justin_state
+workflow/package/
+workflow/cafnusyst_package.tar.gz
+workflow/genie_work_*
+
+# Temporary and editor files
+*.swp
+*~
+*.pyc
+__pycache__/

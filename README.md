@@ -145,5 +145,11 @@ TString branch = f->Get<TNamed>("cafnusyst_srbranch")->GetTitle();
 TString mode   = f->Get<TNamed>("cafnusyst_mode")->GetTitle();
 ```
 
+# Running on justIN (Grid)
 
+Scripts and job configurations to run `cafnusyst` at scale on DUNE's **justIN** workflow management system are available in the [`justin/`](justin/) directory.
 
+See [`justin/README.md`](justin/README.md) for detailed instructions on:
+- Packaging `cafnusyst` and standalone dependencies for grid deployment (`justin/build_and_package.sh`)
+- Interactive local validation inside the grid SL7 container (`justin/test_jobscript_interactive.sh`)
+- Submitting workflows with automated resource limits, MetaCat queries, and staging (`justin/submit_workflow.sh`)
