@@ -1,0 +1,1509 @@
+// genie_all_dials.fcl -- vanilla GENIE Reweight dials only (no SBN/DUNE-specific providers).
+// Generated with upstream nusystematics (NuSystematics/nusystematics develop ba8abbb) against
+// UPS genie v3_04_02 / genie_xsec v3_04_00 AR2320i00000:
+//   GenerateAllDialsConfigNuSyst --mode genierw -o genie_all_dials.fcl
+// Regenerate the same way to change the dial list or the [-3..3] variation descriptor.
+generated_systematic_provider_configuration: {
+   GENIEReWeight_CCQE: {
+      CCQEMomDistroFGtoSF: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "CCQEMomDistroFGtoSF"
+         systParamId: 8
+      }
+      CCQEPauliSupViaKF: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.99999999999999988898e-1,
+            2.99999999999999988898e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "CCQEPauliSupViaKF"
+         systParamId: 7
+      }
+      CoulombCCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "CoulombCCQE"
+         systParamId: 6
+      }
+      RPA_CCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "RPA_CCQE"
+         systParamId: 5
+      }
+      ZExpA1CCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1.40000000000000013323e-1,
+            1.40000000000000013323e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "ZExpA1CCQE"
+         systParamId: 1
+      }
+      ZExpA2CCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -6.70000000000000039968e-1,
+            6.70000000000000039968e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "ZExpA2CCQE"
+         systParamId: 2
+      }
+      ZExpA3CCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1,
+            1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "ZExpA3CCQE"
+         systParamId: 3
+      }
+      ZExpA4CCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -7.5e-1,
+            7.5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "ZExpA4CCQE"
+         systParamId: 4
+      }
+      ZNormCCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1.49999999999999994449e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "ZNormCCQE"
+         systParamId: 0
+      }
+      instance_name: "CCQE"
+      parameter_headers: [
+         "ZNormCCQE",
+         "ZExpA1CCQE",
+         "ZExpA2CCQE",
+         "ZExpA3CCQE",
+         "ZExpA4CCQE",
+         "RPA_CCQE",
+         "CoulombCCQE",
+         "CCQEPauliSupViaKF",
+         "CCQEMomDistroFGtoSF"
+      ]
+      tool_options: {
+         AxFFCCQEDipoleToZExp: true
+         CCRESIsShapeOnly: false
+         DISBYIsShapeOnly: false
+         MaCCQEIsShapeOnly: false
+         NCRESIsShapeOnly: false
+         UseFullHERG: false
+         applies_to_channels: [
+            "CC_*_*_QE"
+         ]
+         evgen_list_name: ""
+         fill_valid_tree: false
+         genie_tune_name: "${GENIE_XSEC_TUNE}"
+         ignore_parameter_dependence: true
+      }
+      tool_type: "GENIEReWeight"
+   }
+   GENIEReWeight_CCRES: {
+      MaCCRES: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaCCRES"
+         systParamId: 9
+      }
+      MvCCRES: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1.00000000000000005551e-1,
+            1.00000000000000005551e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvCCRES"
+         systParamId: 10
+      }
+      instance_name: "CCRES"
+      parameter_headers: [
+         "MaCCRES",
+         "MvCCRES"
+      ]
+      tool_options: {
+         AxFFCCQEDipoleToZExp: false
+         CCRESIsShapeOnly: false
+         DISBYIsShapeOnly: false
+         MaCCQEIsShapeOnly: false
+         NCRESIsShapeOnly: false
+         UseFullHERG: false
+         applies_to_channels: [
+            "CC_*_*_RES"
+         ]
+         evgen_list_name: ""
+         fill_valid_tree: false
+         genie_tune_name: "${GENIE_XSEC_TUNE}"
+         ignore_parameter_dependence: true
+      }
+      tool_type: "GENIEReWeight"
+   }
+   GENIEReWeight_COH: {
+      MaCOHpi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -4.00000000000000022204e-1,
+            4.00000000000000022204e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaCOHpi"
+         systParamId: 11
+      }
+      NormCCCOH: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1,
+            1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NormCCCOH"
+         systParamId: 13
+      }
+      NormNCCOH: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1,
+            1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NormNCCOH"
+         systParamId: 14
+      }
+      R0COHpi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1.00000000000000005551e-1,
+            1.00000000000000005551e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "R0COHpi"
+         systParamId: 12
+      }
+      instance_name: "COH"
+      parameter_headers: [
+         "MaCOHpi",
+         "R0COHpi",
+         "NormCCCOH",
+         "NormNCCOH"
+      ]
+      tool_options: {
+         AxFFCCQEDipoleToZExp: false
+         CCRESIsShapeOnly: false
+         DISBYIsShapeOnly: false
+         MaCCQEIsShapeOnly: false
+         NCRESIsShapeOnly: false
+         UseFullHERG: false
+         applies_to_channels: [
+            "*_*_*_COH"
+         ]
+         evgen_list_name: ""
+         fill_valid_tree: false
+         genie_tune_name: "${GENIE_XSEC_TUNE}"
+         ignore_parameter_dependence: true
+      }
+      tool_type: "GENIEReWeight"
+   }
+   GENIEReWeight_DIS: {
+      AGKYpT1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.99999999999999988898e-2,
+            2.99999999999999988898e-2
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "AGKYpT1pi"
+         systParamId: 20
+      }
+      AGKYxF1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "AGKYxF1pi"
+         systParamId: 19
+      }
+      AhtBY: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.5e-1,
+            2.5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "AhtBY"
+         systParamId: 15
+      }
+      BhtBY: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.5e-1,
+            2.5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "BhtBY"
+         systParamId: 16
+      }
+      CV1uBY: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.99999999999999988898e-1,
+            2.99999999999999988898e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "CV1uBY"
+         systParamId: 17
+      }
+      CV2uBY: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -4.00000000000000022204e-1,
+            4.00000000000000022204e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "CV2uBY"
+         systParamId: 18
+      }
+      instance_name: "DIS"
+      parameter_headers: [
+         "AhtBY",
+         "BhtBY",
+         "CV1uBY",
+         "CV2uBY",
+         "AGKYxF1pi",
+         "AGKYpT1pi"
+      ]
+      tool_options: {
+         AxFFCCQEDipoleToZExp: false
+         CCRESIsShapeOnly: false
+         DISBYIsShapeOnly: false
+         MaCCQEIsShapeOnly: false
+         NCRESIsShapeOnly: false
+         UseFullHERG: false
+         applies_to_channels: [
+            "*_*_*_DIS"
+         ]
+         evgen_list_name: ""
+         fill_valid_tree: false
+         genie_tune_name: "${GENIE_XSEC_TUNE}"
+         ignore_parameter_dependence: true
+      }
+      tool_type: "GENIEReWeight"
+   }
+   GENIEReWeight_FSI: {
+      FormZone: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FormZone"
+         systParamId: 21
+      }
+      FrAbs_N: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrAbs_N"
+         systParamId: 30
+      }
+      FrAbs_pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.99999999999999988898e-1,
+            2.99999999999999988898e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrAbs_pi"
+         systParamId: 25
+      }
+      FrCEx_N: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrCEx_N"
+         systParamId: 28
+      }
+      FrCEx_pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrCEx_pi"
+         systParamId: 23
+      }
+      FrInel_N: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -4.00000000000000022204e-1,
+            4.00000000000000022204e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrInel_N"
+         systParamId: 29
+      }
+      FrInel_pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -4.00000000000000022204e-1,
+            4.00000000000000022204e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrInel_pi"
+         systParamId: 24
+      }
+      FrPiProd_N: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrPiProd_N"
+         systParamId: 31
+      }
+      FrPiProd_pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrPiProd_pi"
+         systParamId: 26
+      }
+      MFP_N: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MFP_N"
+         systParamId: 27
+      }
+      MFP_pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MFP_pi"
+         systParamId: 22
+      }
+      instance_name: "FSI"
+      parameter_headers: [
+         "FormZone",
+         "MFP_pi",
+         "FrCEx_pi",
+         "FrInel_pi",
+         "FrAbs_pi",
+         "FrPiProd_pi",
+         "MFP_N",
+         "FrCEx_N",
+         "FrInel_N",
+         "FrAbs_N",
+         "FrPiProd_N"
+      ]
+      tool_options: {
+         AxFFCCQEDipoleToZExp: false
+         CCRESIsShapeOnly: false
+         DISBYIsShapeOnly: false
+         MaCCQEIsShapeOnly: false
+         NCRESIsShapeOnly: false
+         UseFullHERG: false
+         evgen_list_name: ""
+         fill_valid_tree: false
+         genie_tune_name: "${GENIE_XSEC_TUNE}"
+         ignore_parameter_dependence: true
+      }
+      tool_type: "GENIEReWeight"
+   }
+   GENIEReWeight_MEC: {
+      DecayAngMEC: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "DecayAngMEC"
+         systParamId: 34
+      }
+      FracDelta_CCMEC: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FracDelta_CCMEC"
+         systParamId: 36
+      }
+      FracPN_CCMEC: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FracPN_CCMEC"
+         systParamId: 35
+      }
+      NormCCMEC: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NormCCMEC"
+         systParamId: 32
+      }
+      NormNCMEC: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NormNCMEC"
+         systParamId: 33
+      }
+      XSecShape_CCMEC: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "XSecShape_CCMEC"
+         systParamId: 37
+      }
+      instance_name: "MEC"
+      parameter_headers: [
+         "NormCCMEC",
+         "NormNCMEC",
+         "DecayAngMEC",
+         "FracPN_CCMEC",
+         "FracDelta_CCMEC",
+         "XSecShape_CCMEC"
+      ]
+      tool_options: {
+         AxFFCCQEDipoleToZExp: false
+         CCRESIsShapeOnly: false
+         DISBYIsShapeOnly: false
+         MaCCQEIsShapeOnly: false
+         NCRESIsShapeOnly: false
+         UseFullHERG: false
+         applies_to_channels: [
+            "*_*_*_MEC"
+         ]
+         evgen_list_name: ""
+         fill_valid_tree: false
+         genie_tune_name: "${GENIE_XSEC_TUNE}"
+         ignore_parameter_dependence: true
+      }
+      tool_type: "GENIEReWeight"
+   }
+   GENIEReWeight_NCEL: {
+      EtaNCEL: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.99999999999999988898e-1,
+            2.99999999999999988898e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "EtaNCEL"
+         systParamId: 39
+      }
+      MaNCEL: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.5e-1,
+            2.5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaNCEL"
+         systParamId: 38
+      }
+      instance_name: "NCEL"
+      parameter_headers: [
+         "MaNCEL",
+         "EtaNCEL"
+      ]
+      tool_options: {
+         AxFFCCQEDipoleToZExp: false
+         CCRESIsShapeOnly: false
+         DISBYIsShapeOnly: false
+         MaCCQEIsShapeOnly: false
+         NCRESIsShapeOnly: false
+         UseFullHERG: false
+         applies_to_channels: [
+            "NC_*_*_QE"
+         ]
+         evgen_list_name: ""
+         fill_valid_tree: false
+         genie_tune_name: "${GENIE_XSEC_TUNE}"
+         ignore_parameter_dependence: true
+      }
+      tool_type: "GENIEReWeight"
+   }
+   GENIEReWeight_NCRES: {
+      MaNCRES: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaNCRES"
+         systParamId: 40
+      }
+      MvNCRES: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1.00000000000000005551e-1,
+            1.00000000000000005551e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvNCRES"
+         systParamId: 41
+      }
+      instance_name: "NCRES"
+      parameter_headers: [
+         "MaNCRES",
+         "MvNCRES"
+      ]
+      tool_options: {
+         AxFFCCQEDipoleToZExp: false
+         CCRESIsShapeOnly: false
+         DISBYIsShapeOnly: false
+         MaCCQEIsShapeOnly: false
+         NCRESIsShapeOnly: false
+         UseFullHERG: false
+         applies_to_channels: [
+            "NC_*_*_RES"
+         ]
+         evgen_list_name: ""
+         fill_valid_tree: false
+         genie_tune_name: "${GENIE_XSEC_TUNE}"
+         ignore_parameter_dependence: true
+      }
+      tool_type: "GENIEReWeight"
+   }
+   GENIEReWeight_RES: {
+      RDecBR1eta: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "RDecBR1eta"
+         systParamId: 43
+      }
+      RDecBR1gamma: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "RDecBR1gamma"
+         systParamId: 42
+      }
+      ThetaDelta2NRad: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "ThetaDelta2NRad"
+         systParamId: 45
+      }
+      Theta_Delta2Npi: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "Theta_Delta2Npi"
+         systParamId: 44
+      }
+      instance_name: "RES"
+      parameter_headers: [
+         "RDecBR1gamma",
+         "RDecBR1eta",
+         "Theta_Delta2Npi",
+         "ThetaDelta2NRad"
+      ]
+      tool_options: {
+         AxFFCCQEDipoleToZExp: false
+         CCRESIsShapeOnly: false
+         DISBYIsShapeOnly: false
+         MaCCQEIsShapeOnly: false
+         NCRESIsShapeOnly: false
+         UseFullHERG: false
+         applies_to_channels: [
+            "*_*_*_RES"
+         ]
+         evgen_list_name: ""
+         fill_valid_tree: false
+         genie_tune_name: "${GENIE_XSEC_TUNE}"
+         ignore_parameter_dependence: true
+      }
+      tool_type: "GENIEReWeight"
+   }
+   GENIEReWeight_SPP: {
+      NonRESBGvbarnCC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarnCC1pi"
+         systParamId: 58
+      }
+      NonRESBGvbarnCC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarnCC2pi"
+         systParamId: 59
+      }
+      NonRESBGvbarnNC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarnNC1pi"
+         systParamId: 60
+      }
+      NonRESBGvbarnNC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarnNC2pi"
+         systParamId: 61
+      }
+      NonRESBGvbarpCC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarpCC1pi"
+         systParamId: 54
+      }
+      NonRESBGvbarpCC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarpCC2pi"
+         systParamId: 55
+      }
+      NonRESBGvbarpNC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarpNC1pi"
+         systParamId: 56
+      }
+      NonRESBGvbarpNC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarpNC2pi"
+         systParamId: 57
+      }
+      NonRESBGvnCC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvnCC1pi"
+         systParamId: 50
+      }
+      NonRESBGvnCC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvnCC2pi"
+         systParamId: 51
+      }
+      NonRESBGvnNC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvnNC1pi"
+         systParamId: 52
+      }
+      NonRESBGvnNC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvnNC2pi"
+         systParamId: 53
+      }
+      NonRESBGvpCC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvpCC1pi"
+         systParamId: 46
+      }
+      NonRESBGvpCC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvpCC2pi"
+         systParamId: 47
+      }
+      NonRESBGvpNC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvpNC1pi"
+         systParamId: 48
+      }
+      NonRESBGvpNC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvpNC2pi"
+         systParamId: 49
+      }
+      instance_name: "SPP"
+      parameter_headers: [
+         "NonRESBGvpCC1pi",
+         "NonRESBGvpCC2pi",
+         "NonRESBGvpNC1pi",
+         "NonRESBGvpNC2pi",
+         "NonRESBGvnCC1pi",
+         "NonRESBGvnCC2pi",
+         "NonRESBGvnNC1pi",
+         "NonRESBGvnNC2pi",
+         "NonRESBGvbarpCC1pi",
+         "NonRESBGvbarpCC2pi",
+         "NonRESBGvbarpNC1pi",
+         "NonRESBGvbarpNC2pi",
+         "NonRESBGvbarnCC1pi",
+         "NonRESBGvbarnCC2pi",
+         "NonRESBGvbarnNC1pi",
+         "NonRESBGvbarnNC2pi"
+      ]
+      tool_options: {
+         AxFFCCQEDipoleToZExp: false
+         CCRESIsShapeOnly: false
+         DISBYIsShapeOnly: false
+         MaCCQEIsShapeOnly: false
+         NCRESIsShapeOnly: false
+         UseFullHERG: false
+         applies_to_channels: [
+            "*_*_*_RES",
+            "*_*_*_DIS"
+         ]
+         evgen_list_name: ""
+         fill_valid_tree: false
+         genie_tune_name: "${GENIE_XSEC_TUNE}"
+         ignore_parameter_dependence: true
+      }
+      tool_type: "GENIEReWeight"
+   }
+   _scan_report: {
+      failed_names: []
+      failed_reasons: []
+      fcl_dir: ""
+      genie_rw_skipped_names: [
+         "NormCCQE",
+         "MaCCQEshape",
+         "MaCCQE",
+         "VecFFCCQEshape",
+         "NormCCRES",
+         "MaCCRESshape",
+         "MvCCRESshape",
+         "NormNCRES",
+         "MaNCRESshape",
+         "MvNCRESshape",
+         "AhtBYshape",
+         "BhtBYshape",
+         "CV1uBYshape",
+         "CV2uBYshape",
+         "E0CCQEshape",
+         "E0CCQE",
+         "EmpMEC_FracPN_EM",
+         "EmpMEC_FracEMQE",
+         "NormEMMEC",
+         "(unused GSyst_t enum gaps)"
+      ]
+      genie_rw_skipped_reasons: [
+         "requires IsShapeOnly which conflicts with kept shape+norm dials",
+         "shape-only twin of a kept shape+norm dial",
+         "dipole CCQE FF -- loaded tune uses Z-expansion axial FF",
+         "shape-only twin of a kept shape+norm dial",
+         "requires IsShapeOnly which conflicts with kept shape+norm dials",
+         "shape-only twin of a kept shape+norm dial",
+         "shape-only twin of a kept shape+norm dial",
+         "requires IsShapeOnly which conflicts with kept shape+norm dials",
+         "shape-only twin of a kept shape+norm dial",
+         "shape-only twin of a kept shape+norm dial",
+         "shape-only twin of a kept shape+norm dial",
+         "shape-only twin of a kept shape+norm dial",
+         "shape-only twin of a kept shape+norm dial",
+         "shape-only twin of a kept shape+norm dial",
+         "shape-only twin of a kept shape+norm dial",
+         "dipole CCQE FF -- loaded tune uses Z-expansion axial FF",
+         "EM-only dial -- trivial on weak-current neutrino events",
+         "EM-only dial -- trivial on weak-current neutrino events",
+         "EM-only dial -- trivial on weak-current neutrino events",
+         "2 enum slots with no dial name"
+      ]
+      registered_no_fcl: [
+         "MKSinglePiTemplate",
+         "MINERvAq0q3Weighting",
+         "NOvAStyleNonResPionNorm",
+         "MiscInteractionSysts",
+         "BeRPAWeight",
+         "MINERvAE2p2h",
+         "EbLepMomShift",
+         "FSILikeEAvailSmearing"
+      ]
+      skipped_bug_names: []
+      skipped_bug_reasons: []
+      skipped_data_names: []
+      skipped_data_reasons: []
+      skipped_other_names: []
+      skipped_other_reasons: []
+   }
+   syst_providers: [
+      "GENIEReWeight_CCQE",
+      "GENIEReWeight_CCRES",
+      "GENIEReWeight_COH",
+      "GENIEReWeight_DIS",
+      "GENIEReWeight_FSI",
+      "GENIEReWeight_MEC",
+      "GENIEReWeight_NCEL",
+      "GENIEReWeight_NCRES",
+      "GENIEReWeight_RES",
+      "GENIEReWeight_SPP"
+   ]
+}
+

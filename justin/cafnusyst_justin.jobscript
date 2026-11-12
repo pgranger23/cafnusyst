@@ -19,7 +19,9 @@ JOB_DIR="${PWD}"
 # Cleanup scratch on exit
 cleanup() {
     rm -f "${LOCAL_INPUT:-}" input_cafs.txt
-    rm -rf "${WORKDIR:-}" "${JOB_DIR}/genie_work_"* "${TMPDIR:-/tmp}/genie_work_${USER:-user}_"*
+    # Only remove the GENIE scratch tree setup_runtime.sh created: a generic name
+    # like WORKDIR is often exported by login scripts and must never be rm -rf'ed
+    rm -rf "${CAFNUSYST_GENIE_WORKDIR:-}" "${JOB_DIR}/genie_work_"* "${TMPDIR:-/tmp}/genie_work_${USER:-user}_"*
 }
 trap cleanup EXIT
 

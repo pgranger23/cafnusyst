@@ -46,21 +46,38 @@ if [ -z "$CODEDIR" ] || [ ! -d "$CODEDIR" ]; then
     exit 1
 fi
 
+if [ ! -f "${CODEDIR}/build/Linux/bin/setup.nusystematics.sh" ]; then
+    echo "ERROR: ${CODEDIR}/build/Linux/bin/setup.nusystematics.sh not found!"
+    echo "--nusyst-dir must contain the nusystematics build/ directory (after 'make install')."
+    exit 1
+fi
+
+# A standard nusystematics build (see README.md) uses the UPS fhiclcpp product;
+# only a build that compiled fhicl-cpp-standalone in-tree provides this script.
+if [ -f "${CODEDIR}/build/Linux/bin/setup.fhicl_cpp_standalone.sh" ]; then
+    CAFNUSYST_FHICLCPP="standalone"
+else
+    CAFNUSYST_FHICLCPP="ups"
+fi
+
 echo "Building cafnusyst: $CAFNUSYST_SRC"
-echo "Using nusystematics: $CODEDIR"
+echo "Using nusystematics: $CODEDIR (fhiclcpp: $CAFNUSYST_FHICLCPP)"
 
 # 1. Compile cafnusyst inside standard SL7 container using setup_runtime.sh as base
 singularity exec \
   --env "SCRIPT_DIR=${SCRIPT_DIR}" \
   --env "CODEDIR=${CODEDIR}" \
   --env "CAFNUSYST_SRC=${CAFNUSYST_SRC}" \
+  --env "CAFNUSYST_FHICLCPP=${CAFNUSYST_FHICLCPP}" \
   -B /cvmfs,/exp,/pnfs \
   /cvmfs/singularity.opensciencegrid.org/fermilab/fnal-wn-sl7:latest bash -s <<'BUILD_SCRIPT'
 source "${SCRIPT_DIR}/setup_runtime.sh"
 set -e
 setup cmake v3_27_4
 
-source "${CODEDIR}/build/Linux/bin/setup.fhicl_cpp_standalone.sh"
+if [ "${CAFNUSYST_FHICLCPP}" = "standalone" ]; then
+    source "${CODEDIR}/build/Linux/bin/setup.fhicl_cpp_standalone.sh"
+fi
 source "${CODEDIR}/build/Linux/bin/setup.systematicstools.sh"
 source "${CODEDIR}/build/Linux/bin/setup.nusystematics.sh"
 
@@ -96,6 +113,9 @@ fi
 cp -a "${SCRIPT_DIR}/fcl/"*.fcl "${PKG_DIR}/fcl/"
 cp -a "${SCRIPT_DIR}/setup_runtime.sh" "${PKG_DIR}/setup_runtime.sh"
 chmod +x "${PKG_DIR}/setup_runtime.sh"
+if [ "${CAFNUSYST_FHICLCPP}" = "ups" ]; then
+    touch "${PKG_DIR}/.fhiclcpp_ups"
+fi
 
 # 3. Create tarball
 echo "Creating package tarball: $OUTPUT_TARBALL"
