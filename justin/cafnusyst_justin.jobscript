@@ -50,14 +50,17 @@ fetch_file() {
 # ------------------------------------------------------------------------------
 if [ -f "./setup_runtime.sh" ]; then
     echo "Using existing package in current directory"
+elif [ -n "${INPUT_TAR_DIR_LOCAL:-}" ] && [ -f "${INPUT_TAR_DIR_LOCAL}/setup_runtime.sh" ]; then
+    echo "Using package from ${INPUT_TAR_DIR_LOCAL}"
+    cp -a "${INPUT_TAR_DIR_LOCAL}/." .
 elif [ -f "${JOB_DIR}/cafnusyst_package.tar.gz" ]; then
     tar -xzf "${JOB_DIR}/cafnusyst_package.tar.gz"
 elif [ -n "$PACKAGE_TARBALL_URL" ]; then
     echo "Fetching package from ${PACKAGE_TARBALL_URL}..."
-    fetch_file "$PACKAGE_TARBALL_URL" ./pkg.tar.gz
+    fetch_file "$PACKAGE_TARBALL_URL" ./pkg.tar.gz || { echo "ERROR: could not fetch ${PACKAGE_TARBALL_URL}"; exit 1; }
     tar -xzf ./pkg.tar.gz && rm -f ./pkg.tar.gz
 else
-    echo "ERROR: No cafnusyst package found. Please set PACKAGE_TARBALL_URL."
+    echo "ERROR: No cafnusyst package found. Set INPUT_TAR_DIR_LOCAL or PACKAGE_TARBALL_URL."
     exit 1
 fi
 

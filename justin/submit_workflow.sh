@@ -15,7 +15,9 @@ DEFAULT_FCL="systs_atmospherics_v2.fcl"
 DEFAULT_FILES_PER_JOB=1
 DEFAULT_WALL_SECONDS=14400
 DEFAULT_RSS_MIB=4000
-DEFAULT_PACKAGE_URL="/pnfs/dune/scratch/users/${USER}/cafnusyst_package.tar.gz"
+# Empty = upload the local tarball to cvmfs with justin-cvmfs-upload (RCDS): grid
+# workers do not mount /pnfs or /exp, so a plain path cannot be read there
+DEFAULT_PACKAGE_URL=""
 
 usage() {
     cat <<EOF
@@ -26,7 +28,7 @@ Options:
   --fcl <file>           Systematic FHiCL file (Default: "$DEFAULT_FCL")
   --files-per-job <n>    Number of files per worker job (Default: $DEFAULT_FILES_PER_JOB, 0 = unlimited)
   --scope <scope>        Rucio/justIN scope (Default: "$DEFAULT_SCOPE")
-  --package-url <path>   Tarball path or URL (Default: "$DEFAULT_PACKAGE_URL")
+  --package-url <url>    Tarball root:// or https:// URL (Default: upload to cvmfs via RCDS)
   --wall-seconds <sec>   Job walltime limit in seconds (Default: $DEFAULT_WALL_SECONDS)
   --rss-mib <mib>        Memory limit in MiB (Default: $DEFAULT_RSS_MIB)
   --site <sitename>      Restrict to specific site (e.g. US_FNAL-FermiGrid)
@@ -80,24 +82,32 @@ if [ ! -f "$PACKAGE_TARBALL" ] && [ "$DRY_RUN" = false ]; then
     "${SCRIPT_DIR}/build_and_package.sh"
 fi
 
-# Stage local tarball to dCache scratch if using default PNFS location
-if [ -f "$PACKAGE_TARBALL" ] && [[ "$PACKAGE_URL" == /pnfs/* ]] && [ "$DRY_RUN" = false ]; then
-    if [ ! -f "$PACKAGE_URL" ] || [ "$PACKAGE_TARBALL" -nt "$PACKAGE_URL" ]; then
-        echo "Staging cafnusyst package to $PACKAGE_URL..."
-        mkdir -p "$(dirname "$PACKAGE_URL")" 2>/dev/null || true
-        rm -f "$PACKAGE_URL" 2>/dev/null || true
-        if command -v ifdh &>/dev/null; then
-            ifdh cp "$PACKAGE_TARBALL" "$PACKAGE_URL" || cp -f "$PACKAGE_TARBALL" "$PACKAGE_URL"
-        else
-            cp -f "$PACKAGE_TARBALL" "$PACKAGE_URL"
-        fi
-    fi
-fi
-
 # Set up justin if needed
 if ! command -v justin &>/dev/null; then
     source /cvmfs/dune.opensciencegrid.org/products/dune/setup_dune.sh 2>/dev/null || true
     setup justin 2>/dev/null || true
+fi
+
+PACKAGE_ENV="PACKAGE_TARBALL_URL=${PACKAGE_URL}"
+if [ -z "$PACKAGE_URL" ]; then
+    if [ "$DRY_RUN" = true ]; then
+        PACKAGE_ENV="INPUT_TAR_DIR_LOCAL=<RCDS dir of ${PACKAGE_TARBALL}>"
+    else
+        echo "Uploading ${PACKAGE_TARBALL} to cvmfs (RCDS)..."
+        RCDS_DIR="$(justin-cvmfs-upload "$PACKAGE_TARBALL")"
+        if [ -z "$RCDS_DIR" ]; then
+            echo "ERROR: justin-cvmfs-upload failed (refresh token: htgettoken -a htvaultprod.fnal.gov -i dune)"
+            exit 1
+        fi
+        PACKAGE_ENV="INPUT_TAR_DIR_LOCAL=${RCDS_DIR}"
+        PACKAGE_URL="$RCDS_DIR"
+        # RCDS directories take about a minute to appear on cvmfs
+        echo "Waiting for ${RCDS_DIR} to appear on cvmfs..."
+        for _ in $(seq 1 30); do
+            [ -f "${RCDS_DIR}/setup_runtime.sh" ] && break
+            sleep 10
+        done
+    fi
 fi
 
 CMD=(
@@ -113,7 +123,7 @@ CMD=(
     --lifetime-days 7
     --env "FILES_PER_JOB=${FILES_PER_JOB}"
     --env "CAFNUSYST_FCL=${FCL_TARGET}"
-    --env "PACKAGE_TARBALL_URL=${PACKAGE_URL}"
+    --env "$PACKAGE_ENV"
 )
 
 if [ -n "$SITE" ]; then
