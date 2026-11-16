@@ -254,6 +254,9 @@ void WeightUpdater::ProcessFile(std::string inputfile){
         outNu.genieIdx = GlobalGENIEEventCounter;
       }
 
+      // fSR is reused across GetEntry() calls and the input may carry no
+      // xsec_systs branch to overwrite it, so drop the previous entry's dials.
+      outNu.xsec_systs.clear();
       for(systtools::paramId_t pid : fRH->GetParameters()) {
         systtools::SystParamHeader const &sph = fRH->GetHeader( pid );
         if(sph.isResponselessParam){
