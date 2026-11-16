@@ -131,7 +131,11 @@ process_file() {
 
     echo "$LOCAL_INPUT" > input_cafs.txt
 
-    OUTBASE="$(basename "$file_pfn" .root)"
+    # Input names can already be ~220 characters and Rucio uploads through
+    # <name>.rucio.upload (255-character limit), so name outputs by workflow and
+    # a hash of the input DID instead.
+    OUTBASE="${JUSTIN_WORKFLOW_ID:-local}_$(printf '%s' "$file_did" | sha1sum | cut -c1-12)"
+    echo "Output base:   $OUTBASE (from $file_did)"
     FLAT_OUT="${OUTBASE}.cafnusyst.flat.root"
     NESTED_OUT="${OUTBASE}.cafnusyst.nested.root"
 
