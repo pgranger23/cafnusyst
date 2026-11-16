@@ -1,0 +1,2460 @@
+// DUNE.v0.ParameterHeader.fcl -- DUNE v0 cross-section systematics (126 dials, 13 providers).
+// Generated from DUNE.v0.ToolConfig.yaml (from Jaesung) with the upstream nusystematics used here:
+//   justin/yaml_to_fcl.py DUNE.v0.ToolConfig.yaml DUNE.v0.ToolConfig.fcl
+//   GenerateSystProviderConfigNuSyst -c DUNE.v0.ToolConfig.fcl -o DUNE.v0.ParameterHeader.fcl
+// Same dials, IDs, variations and sigmas as the DUNE.v0.ParameterHeader.yaml handed out with it;
+// only WSReweight's tool_options differ (this nusystematics requires OPT_STRING/OPT_BOOL there).
+// Data paths use ${NUSYST_DATA_DIR}, which setup_runtime.sh points at the packaged nusyst_data/.
+generated_systematic_provider_configuration: {
+   CCQETemplateReweight_DUNE_v0_HFToCRPA: {
+      instance_name: "DUNE_v0_HFToCRPA"
+      parameter_headers: [
+         "q0bin0",
+         "q0bin1",
+         "q0bin2",
+         "q0bin3",
+         "q0bin4"
+      ]
+      q0bin0: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin0"
+         systParamId: 66
+      }
+      q0bin1: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin1"
+         systParamId: 67
+      }
+      q0bin2: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin2"
+         systParamId: 68
+      }
+      q0bin3: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin3"
+         systParamId: 69
+      }
+      q0bin4: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin4"
+         systParamId: 70
+      }
+      tool_options: {
+         CCQETemplateReweight_input_manifest: {
+            ENuBoundary: 1
+            RWMode: "q3q0"
+            baseline_tune: "G21_12a_00_000"
+            input_file: "${NUSYST_DATA_DIR}/CCQEReweight/CCQEReweight_templates_all_tunes.root"
+            target_tune: "G21_13a_00_000"
+         }
+         fill_valid_tree: false
+         q0_bin_edges: [
+            0,
+            5.00000000000000027756e-2,
+            1.00000000000000005551e-1,
+            2.00000000000000011102e-1,
+            6.99999999999999955591e-1,
+            10
+         ]
+         verbosity_level: 0
+      }
+      tool_type: "CCQETemplateReweight"
+   }
+   CCQETemplateReweight_DUNE_v0_LFGToHF: {
+      instance_name: "DUNE_v0_LFGToHF"
+      parameter_headers: [
+         "q0bin0",
+         "q0bin1",
+         "q0bin2",
+         "q0bin3",
+         "q0bin4"
+      ]
+      q0bin0: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin0"
+         systParamId: 61
+      }
+      q0bin1: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin1"
+         systParamId: 62
+      }
+      q0bin2: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin2"
+         systParamId: 63
+      }
+      q0bin3: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin3"
+         systParamId: 64
+      }
+      q0bin4: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin4"
+         systParamId: 65
+      }
+      tool_options: {
+         CCQETemplateReweight_input_manifest: {
+            ENuBoundary: 1
+            RWMode: "q3q0"
+            baseline_tune: "AR23_20i_01_000"
+            input_file: "${NUSYST_DATA_DIR}/CCQEReweight/CCQEReweight_templates_all_tunes.root"
+            target_tune: "G21_12a_00_000"
+         }
+         fill_valid_tree: false
+         q0_bin_edges: [
+            0,
+            5.00000000000000027756e-2,
+            1.00000000000000005551e-1,
+            2.00000000000000011102e-1,
+            6.99999999999999955591e-1,
+            10
+         ]
+         verbosity_level: 0
+      }
+      tool_type: "CCQETemplateReweight"
+   }
+   CCQETemplateReweight_DUNE_v0_LFGToSF: {
+      instance_name: "DUNE_v0_LFGToSF"
+      parameter_headers: [
+         "q0bin0",
+         "q0bin1",
+         "q0bin2",
+         "q0bin3",
+         "q0bin4"
+      ]
+      q0bin0: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin0"
+         systParamId: 56
+      }
+      q0bin1: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin1"
+         systParamId: 57
+      }
+      q0bin2: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin2"
+         systParamId: 58
+      }
+      q0bin3: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin3"
+         systParamId: 59
+      }
+      q0bin4: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "q0bin4"
+         systParamId: 60
+      }
+      tool_options: {
+         CCQETemplateReweight_input_manifest: {
+            ENuBoundary: 1
+            RWMode: "q3q0"
+            baseline_tune: "AR23_20i_01_000"
+            input_file: "${NUSYST_DATA_DIR}/CCQEReweight/CCQEReweight_templates_all_tunes.root"
+            target_tune: "AR25_20i_01_000"
+         }
+         fill_valid_tree: false
+         q0_bin_edges: [
+            0,
+            5.00000000000000027756e-2,
+            1.00000000000000005551e-1,
+            2.00000000000000011102e-1,
+            6.99999999999999955591e-1,
+            10
+         ]
+         verbosity_level: 0
+      }
+      tool_type: "CCQETemplateReweight"
+   }
+   CCQEXSecCorr_DUNE_v0: {
+      CCQEXSecCorr: {
+         centralParamValue: 1
+         isCorrection: true
+         isSplineable: true
+         paramVariations: [
+            1
+         ]
+         prettyName: "CCQEXSecCorr"
+         systParamId: 71
+      }
+      instance_name: "DUNE_v0"
+      parameter_headers: [
+         "CCQEXSecCorr"
+      ]
+      tool_options: {
+         CCQEXSecCorr_input_manifest: {
+            DataBaseDir: "$NUSYST_DATA_DIR/QEFix"
+            EdgeClamp: true
+            EnergyGrid: [
+               2e-1,
+               2.5e-1,
+               3e-1,
+               3.5e-1,
+               4e-1,
+               4.5e-1,
+               5e-1,
+               5.5e-1,
+               6e-1,
+               6.5e-1,
+               7e-1,
+               7.5e-1,
+               8e-1,
+               8.5e-1,
+               9e-1,
+               9.5e-1,
+               1,
+               1.05,
+               1.1,
+               1.15,
+               1.2,
+               1.25,
+               1.3,
+               1.35,
+               1.4,
+               1.45,
+               1.5,
+               1.55,
+               1.6,
+               1.65,
+               1.7,
+               1.75,
+               1.8,
+               1.85,
+               1.9,
+               1.95,
+               2,
+               2.05,
+               2.1,
+               2.15,
+               2.2,
+               2.25,
+               2.3,
+               2.35,
+               2.4,
+               2.45,
+               2.5,
+               2.55,
+               2.6,
+               2.65,
+               2.7,
+               2.75,
+               2.8,
+               2.85,
+               2.9,
+               2.95,
+               3
+            ]
+            EnuMax: 3
+            EnuMin: 2e-1
+            EnuSnapTol: 5e-3
+            UseNearestBin: true
+            WeightLimits: [
+               0,
+               30
+            ]
+            file_pattern: "reweight_data_v3_04_02a_to_v3_06_02_sbn2_CCQE_%FLAVOR%_%ENERGY%GeV_flat.root"
+            histogram_name: "h_weights_map"
+         }
+         fill_valid_tree: false
+      }
+      tool_type: "CCQEXSecCorr"
+   }
+   GENIEReWeight_DUNE_v0: {
+      AhtBY: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.5e-1,
+            2.5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "AhtBY"
+         systParamId: 38
+      }
+      BhtBY: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.5e-1,
+            2.5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "BhtBY"
+         systParamId: 39
+      }
+      CV1uBY: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.99999999999999988898e-1,
+            2.99999999999999988898e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "CV1uBY"
+         systParamId: 40
+      }
+      CV2uBY: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -4.00000000000000022204e-1,
+            4.00000000000000022204e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "CV2uBY"
+         systParamId: 41
+      }
+      CoulombCCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "CoulombCCQE"
+         systParamId: 6
+      }
+      DecayAngMEC: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            0,
+            1
+         ]
+         prettyName: "DecayAngMEC"
+         systParamId: 9
+      }
+      EtaNCEL: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.99999999999999988898e-1,
+            2.99999999999999988898e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "EtaNCEL"
+         systParamId: 11
+      }
+      FrAbs_N: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrAbs_N"
+         systParamId: 50
+      }
+      FrAbs_pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.99999999999999988898e-1,
+            2.99999999999999988898e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrAbs_pi"
+         systParamId: 45
+      }
+      FrCEx_N: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrCEx_N"
+         systParamId: 48
+      }
+      FrCEx_pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrCEx_pi"
+         systParamId: 43
+      }
+      FrInel_N: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -4.00000000000000022204e-1,
+            4.00000000000000022204e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrInel_N"
+         systParamId: 49
+      }
+      FrInel_pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -4.00000000000000022204e-1,
+            4.00000000000000022204e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrInel_pi"
+         systParamId: 44
+      }
+      FrPiProd_N: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrPiProd_N"
+         systParamId: 51
+      }
+      FrPiProd_pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "FrPiProd_pi"
+         systParamId: 46
+      }
+      MFP_N: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MFP_N"
+         systParamId: 47
+      }
+      MFP_pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MFP_pi"
+         systParamId: 42
+      }
+      MaCCRES: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaCCRES"
+         systParamId: 12
+      }
+      MaNCEL: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.5e-1,
+            2.5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaNCEL"
+         systParamId: 10
+      }
+      MaNCRES: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -2.00000000000000011102e-1,
+            2.00000000000000011102e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaNCRES"
+         systParamId: 14
+      }
+      MvCCRES: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1.00000000000000005551e-1,
+            1.00000000000000005551e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvCCRES"
+         systParamId: 13
+      }
+      MvNCRES: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1.00000000000000005551e-1,
+            1.00000000000000005551e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvNCRES"
+         systParamId: 15
+      }
+      NonRESBGvbarnCC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarnCC1pi"
+         systParamId: 28
+      }
+      NonRESBGvbarnCC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarnCC2pi"
+         systParamId: 29
+      }
+      NonRESBGvbarnNC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarnNC1pi"
+         systParamId: 30
+      }
+      NonRESBGvbarnNC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarnNC2pi"
+         systParamId: 31
+      }
+      NonRESBGvbarpCC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarpCC1pi"
+         systParamId: 24
+      }
+      NonRESBGvbarpCC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarpCC2pi"
+         systParamId: 25
+      }
+      NonRESBGvbarpNC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarpNC1pi"
+         systParamId: 26
+      }
+      NonRESBGvbarpNC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvbarpNC2pi"
+         systParamId: 27
+      }
+      NonRESBGvnCC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvnCC1pi"
+         systParamId: 20
+      }
+      NonRESBGvnCC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvnCC2pi"
+         systParamId: 21
+      }
+      NonRESBGvnNC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvnNC1pi"
+         systParamId: 22
+      }
+      NonRESBGvnNC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvnNC2pi"
+         systParamId: 23
+      }
+      NonRESBGvpCC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvpCC1pi"
+         systParamId: 16
+      }
+      NonRESBGvpCC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvpCC2pi"
+         systParamId: 17
+      }
+      NonRESBGvpNC1pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvpNC1pi"
+         systParamId: 18
+      }
+      NonRESBGvpNC2pi: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NonRESBGvpNC2pi"
+         systParamId: 19
+      }
+      NormCCCOH: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1,
+            1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NormCCCOH"
+         systParamId: 36
+      }
+      NormCCMEC: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NormCCMEC"
+         systParamId: 7
+      }
+      NormNCCOH: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1,
+            1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NormNCCOH"
+         systParamId: 37
+      }
+      NormNCMEC: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "NormNCMEC"
+         systParamId: 8
+      }
+      RDecBR1eta: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "RDecBR1eta"
+         systParamId: 33
+      }
+      RDecBR1gamma: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -5e-1,
+            5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "RDecBR1gamma"
+         systParamId: 32
+      }
+      RPA_CCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "RPA_CCQE"
+         systParamId: 5
+      }
+      ThetaDelta2NRad: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            0,
+            1
+         ]
+         prettyName: "ThetaDelta2NRad"
+         systParamId: 35
+      }
+      Theta_Delta2Npi: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            0,
+            1
+         ]
+         prettyName: "Theta_Delta2Npi"
+         systParamId: 34
+      }
+      VecFFCCQEshape: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            0,
+            1
+         ]
+         prettyName: "VecFFCCQEshape"
+         systParamId: 4
+      }
+      ZExpA1CCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1.40000000000000013323e-1,
+            1.40000000000000013323e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "ZExpA1CCQE"
+         systParamId: 0
+      }
+      ZExpA2CCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -6.70000000000000039968e-1,
+            6.70000000000000039968e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "ZExpA2CCQE"
+         systParamId: 1
+      }
+      ZExpA3CCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -1,
+            1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "ZExpA3CCQE"
+         systParamId: 2
+      }
+      ZExpA4CCQE: {
+         centralParamValue: 0
+         isSplineable: true
+         oneSigmaShifts: [
+            -7.5e-1,
+            7.5e-1
+         ]
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "ZExpA4CCQE"
+         systParamId: 3
+      }
+      instance_name: "DUNE_v0"
+      parameter_headers: [
+         "ZExpA1CCQE",
+         "ZExpA2CCQE",
+         "ZExpA3CCQE",
+         "ZExpA4CCQE",
+         "VecFFCCQEshape",
+         "RPA_CCQE",
+         "CoulombCCQE",
+         "NormCCMEC",
+         "NormNCMEC",
+         "DecayAngMEC",
+         "MaNCEL",
+         "EtaNCEL",
+         "MaCCRES",
+         "MvCCRES",
+         "MaNCRES",
+         "MvNCRES",
+         "NonRESBGvpCC1pi",
+         "NonRESBGvpCC2pi",
+         "NonRESBGvpNC1pi",
+         "NonRESBGvpNC2pi",
+         "NonRESBGvnCC1pi",
+         "NonRESBGvnCC2pi",
+         "NonRESBGvnNC1pi",
+         "NonRESBGvnNC2pi",
+         "NonRESBGvbarpCC1pi",
+         "NonRESBGvbarpCC2pi",
+         "NonRESBGvbarpNC1pi",
+         "NonRESBGvbarpNC2pi",
+         "NonRESBGvbarnCC1pi",
+         "NonRESBGvbarnCC2pi",
+         "NonRESBGvbarnNC1pi",
+         "NonRESBGvbarnNC2pi",
+         "RDecBR1gamma",
+         "RDecBR1eta",
+         "Theta_Delta2Npi",
+         "ThetaDelta2NRad",
+         "NormCCCOH",
+         "NormNCCOH",
+         "AhtBY",
+         "BhtBY",
+         "CV1uBY",
+         "CV2uBY",
+         "MFP_pi",
+         "FrCEx_pi",
+         "FrInel_pi",
+         "FrAbs_pi",
+         "FrPiProd_pi",
+         "MFP_N",
+         "FrCEx_N",
+         "FrInel_N",
+         "FrAbs_N",
+         "FrPiProd_N"
+      ]
+      tool_options: {
+         AxFFCCQEDipoleToZExp: true
+         CCRESIsShapeOnly: false
+         DISBYIsShapeOnly: false
+         MaCCQEIsShapeOnly: false
+         NCRESIsShapeOnly: false
+         UseFullHERG: true
+         evgen_list_name: ""
+         fill_valid_tree: false
+         genie_tune_name: "${GENIE_XSEC_TUNE}"
+         ignore_parameter_dependence: true
+      }
+      tool_type: "GENIEReWeight"
+   }
+   MECq0q3InterpWeighting_DUNE_v0_SuSAToMar: {
+      MECResponse_q0bin0: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "MECResponse_q0bin0"
+         systParamId: 82
+      }
+      MECResponse_q0bin1: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "MECResponse_q0bin1"
+         systParamId: 83
+      }
+      MECResponse_q0bin2: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "MECResponse_q0bin2"
+         systParamId: 84
+      }
+      MECResponse_q0bin3: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "MECResponse_q0bin3"
+         systParamId: 85
+      }
+      instance_name: "DUNE_v0_SuSAToMar"
+      parameter_headers: [
+         "MECResponse_q0bin0",
+         "MECResponse_q0bin1",
+         "MECResponse_q0bin2",
+         "MECResponse_q0bin3"
+      ]
+      tool_options: {
+         MECResponse_input_manifest: {
+            EdgeClamp: true
+            EnuMax: 3
+            EnuMin: 2e-1
+            EnuSnapTol: 5e-3
+            Flavors: [
+               "numu",
+               "numubar",
+               "nue",
+               "nuebar"
+            ]
+            Model: "martini"
+            OutOfRangeWeight: 0
+            Q0ApplyMax: 9.95e-1
+            Q0ApplyMin: 0
+            Q0Bins: [
+               0,
+               2e-1,
+               4e-1,
+               6e-1,
+               10
+            ]
+            Q3ApplyMax: 2
+            Q3ApplyMin: 0
+            UseNearestBin: false
+            WeightLimits: [
+               1e-1,
+               1000
+            ]
+            WeightMapFile3D: "${NUSYST_DATA_DIR}/CCMEC_template/ccmec_weight_maps_3d_q0_q3_Enu_all_flavors_valencia_martini.root"
+         }
+      }
+      tool_type: "MECq0q3InterpWeighting"
+   }
+   MECq0q3InterpWeighting_SuSAv2ToValenica_q0binned_all: {
+      MECResponse_q0bin0: {
+         centralParamValue: 1
+         isCorrection: true
+         isSplineable: true
+         paramVariations: [
+            1
+         ]
+         prettyName: "MECResponse_q0bin0"
+         systParamId: 78
+      }
+      MECResponse_q0bin1: {
+         centralParamValue: 1
+         isCorrection: true
+         isSplineable: true
+         paramVariations: [
+            1
+         ]
+         prettyName: "MECResponse_q0bin1"
+         systParamId: 79
+      }
+      MECResponse_q0bin2: {
+         centralParamValue: 1
+         isCorrection: true
+         isSplineable: true
+         paramVariations: [
+            1
+         ]
+         prettyName: "MECResponse_q0bin2"
+         systParamId: 80
+      }
+      MECResponse_q0bin3: {
+         centralParamValue: 1
+         isCorrection: true
+         isSplineable: true
+         paramVariations: [
+            1
+         ]
+         prettyName: "MECResponse_q0bin3"
+         systParamId: 81
+      }
+      instance_name: "SuSAv2ToValenica_q0binned_all"
+      parameter_headers: [
+         "MECResponse_q0bin0",
+         "MECResponse_q0bin1",
+         "MECResponse_q0bin2",
+         "MECResponse_q0bin3"
+      ]
+      tool_options: {
+         MECResponse_input_manifest: {
+            EdgeClamp: true
+            EnuMax: 3
+            EnuMin: 2e-1
+            EnuSnapTol: 5e-3
+            Flavors: [
+               "numu",
+               "numubar",
+               "nue",
+               "nuebar"
+            ]
+            Model: "valencia"
+            OutOfRangeWeight: 0
+            Q0ApplyMax: 1.2
+            Q0ApplyMin: 0
+            Q0Bins: [
+               0,
+               2e-1,
+               4e-1,
+               6e-1,
+               10
+            ]
+            Q3ApplyMax: 1.2
+            Q3ApplyMin: 0
+            UseNearestBin: false
+            WeightLimits: [
+               1e-1,
+               1000
+            ]
+            WeightMapFile3D: "${NUSYST_DATA_DIR}/CCMEC_template/ccmec_weight_maps_3d_q0_q3_Enu_all_flavors_valencia_martini.root"
+         }
+      }
+      tool_type: "MECq0q3InterpWeighting"
+   }
+   PionAbsWeighter_DUNE_v0: {
+      QuasiDeuteronFraction: {
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "QuasiDeuteronFraction"
+         systParamId: 123
+      }
+      instance_name: "DUNE_v0"
+      parameter_headers: [
+         "QuasiDeuteronFraction"
+      ]
+      tool_options: {
+         PionAbs_input_manifest: {
+            input_file: ""
+            inputs: []
+         }
+         verbosity_level: 5
+      }
+      tool_type: "PionAbsWeighter"
+   }
+   QEInterference_DUNE_v0: {
+      QEIntf_dial_0: {
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "QEIntf_dial_0"
+         systParamId: 72
+      }
+      QEIntf_dial_1: {
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "QEIntf_dial_1"
+         systParamId: 73
+      }
+      QEIntf_dial_2: {
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "QEIntf_dial_2"
+         systParamId: 74
+      }
+      QEIntf_dial_3: {
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "QEIntf_dial_3"
+         systParamId: 75
+      }
+      QEIntf_dial_4: {
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "QEIntf_dial_4"
+         systParamId: 76
+      }
+      QEIntf_dial_5: {
+         isSplineable: true
+         paramVariations: [
+            1,
+            -1,
+            2,
+            -2,
+            3,
+            -3
+         ]
+         prettyName: "QEIntf_dial_5"
+         systParamId: 77
+      }
+      instance_name: "DUNE_v0"
+      parameter_headers: [
+         "QEIntf_dial_0",
+         "QEIntf_dial_1",
+         "QEIntf_dial_2",
+         "QEIntf_dial_3",
+         "QEIntf_dial_4",
+         "QEIntf_dial_5"
+      ]
+      tool_options: {
+         QEInterference_input_manifest: {
+            input_file: "${NUSYST_DATA_DIR}/QEInterference/ACHILLES_weights.root"
+            inputs: [
+               {
+                  input_enu_bins: "numu_cc_enu_bins"
+                  input_hist: "numu_cc_weights"
+                  input_q0_bins: "numu_cc_q0_bins"
+                  input_q3_bins: "numu_cc_q3_bins"
+                  name: "numu_cc"
+               },
+               {
+                  input_enu_bins: "nue_cc_enu_bins"
+                  input_hist: "nue_cc_weights"
+                  input_q0_bins: "nue_cc_q0_bins"
+                  input_q3_bins: "nue_cc_q3_bins"
+                  name: "nue_cc"
+               },
+               {
+                  input_enu_bins: "numu_nc_enu_bins"
+                  input_hist: "numu_nc_weights"
+                  input_q0_bins: "numu_nc_q0_bins"
+                  input_q3_bins: "numu_nc_q3_bins"
+                  name: "numu_nc"
+               },
+               {
+                  input_enu_bins: "nue_nc_enu_bins"
+                  input_hist: "nue_nc_weights"
+                  input_q0_bins: "nue_nc_q0_bins"
+                  input_q3_bins: "nue_nc_q3_bins"
+                  name: "nue_nc"
+               }
+            ]
+         }
+         q0_bin_edges: [
+            0,
+            2.5e-1,
+            5e-1,
+            7.5e-1,
+            1,
+            2,
+            3
+         ]
+         verbosity_level: 5
+      }
+      tool_type: "QEInterference"
+   }
+   ResIso_DUNE_v0: {
+      MaRes_ResCode0: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode0"
+         systParamId: 87
+      }
+      MaRes_ResCode1: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode1"
+         systParamId: 89
+      }
+      MaRes_ResCode10: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode10"
+         systParamId: 107
+      }
+      MaRes_ResCode11: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode11"
+         systParamId: 109
+      }
+      MaRes_ResCode12: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode12"
+         systParamId: 111
+      }
+      MaRes_ResCode13: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode13"
+         systParamId: 113
+      }
+      MaRes_ResCode14: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode14"
+         systParamId: 115
+      }
+      MaRes_ResCode15: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode15"
+         systParamId: 117
+      }
+      MaRes_ResCode16: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode16"
+         systParamId: 119
+      }
+      MaRes_ResCode17: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode17"
+         systParamId: 121
+      }
+      MaRes_ResCode2: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode2"
+         systParamId: 91
+      }
+      MaRes_ResCode3: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode3"
+         systParamId: 93
+      }
+      MaRes_ResCode4: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode4"
+         systParamId: 95
+      }
+      MaRes_ResCode5: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode5"
+         systParamId: 97
+      }
+      MaRes_ResCode6: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode6"
+         systParamId: 99
+      }
+      MaRes_ResCode7: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode7"
+         systParamId: 101
+      }
+      MaRes_ResCode8: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode8"
+         systParamId: 103
+      }
+      MaRes_ResCode9: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MaRes_ResCode9"
+         systParamId: 105
+      }
+      MvRes_ResCode0: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode0"
+         systParamId: 88
+      }
+      MvRes_ResCode1: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode1"
+         systParamId: 90
+      }
+      MvRes_ResCode10: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode10"
+         systParamId: 108
+      }
+      MvRes_ResCode11: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode11"
+         systParamId: 110
+      }
+      MvRes_ResCode12: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode12"
+         systParamId: 112
+      }
+      MvRes_ResCode13: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode13"
+         systParamId: 114
+      }
+      MvRes_ResCode14: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode14"
+         systParamId: 116
+      }
+      MvRes_ResCode15: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode15"
+         systParamId: 118
+      }
+      MvRes_ResCode16: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode16"
+         systParamId: 120
+      }
+      MvRes_ResCode17: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode17"
+         systParamId: 122
+      }
+      MvRes_ResCode2: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode2"
+         systParamId: 92
+      }
+      MvRes_ResCode3: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode3"
+         systParamId: 94
+      }
+      MvRes_ResCode4: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode4"
+         systParamId: 96
+      }
+      MvRes_ResCode5: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode5"
+         systParamId: 98
+      }
+      MvRes_ResCode6: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode6"
+         systParamId: 100
+      }
+      MvRes_ResCode7: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode7"
+         systParamId: 102
+      }
+      MvRes_ResCode8: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode8"
+         systParamId: 104
+      }
+      MvRes_ResCode9: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "MvRes_ResCode9"
+         systParamId: 106
+      }
+      instance_name: "DUNE_v0"
+      parameter_headers: [
+         "MaRes_ResCode0",
+         "MvRes_ResCode0",
+         "MaRes_ResCode1",
+         "MvRes_ResCode1",
+         "MaRes_ResCode2",
+         "MvRes_ResCode2",
+         "MaRes_ResCode3",
+         "MvRes_ResCode3",
+         "MaRes_ResCode4",
+         "MvRes_ResCode4",
+         "MaRes_ResCode5",
+         "MvRes_ResCode5",
+         "MaRes_ResCode6",
+         "MvRes_ResCode6",
+         "MaRes_ResCode7",
+         "MvRes_ResCode7",
+         "MaRes_ResCode8",
+         "MvRes_ResCode8",
+         "MaRes_ResCode9",
+         "MvRes_ResCode9",
+         "MaRes_ResCode10",
+         "MvRes_ResCode10",
+         "MaRes_ResCode11",
+         "MvRes_ResCode11",
+         "MaRes_ResCode12",
+         "MvRes_ResCode12",
+         "MaRes_ResCode13",
+         "MvRes_ResCode13",
+         "MaRes_ResCode14",
+         "MvRes_ResCode14",
+         "MaRes_ResCode15",
+         "MvRes_ResCode15",
+         "MaRes_ResCode16",
+         "MvRes_ResCode16",
+         "MaRes_ResCode17",
+         "MvRes_ResCode17"
+      ]
+      tool_options: {
+         verbosity_level: 1
+      }
+      tool_type: "ResIso"
+   }
+   ValenciaExc2p2hReweighter_DUNE_v0: {
+      DialValencia: {
+         centralParamValue: 0
+         isSplineable: true
+         paramVariations: [
+            0,
+            1
+         ]
+         prettyName: "DialValencia"
+         systParamId: 86
+      }
+      instance_name: "DUNE_v0"
+      parameter_headers: [
+         "DialValencia"
+      ]
+      tool_options: {
+         JSON_PN_REWEIGHTER_PATH: "$NUSYST_DATA_DIR/ValenciaExc2p2hReweighter/ICARUS_BNB_numu_C12_SuSAv2_to_ValenciaExclusive_2p2h_pn_bdtreweighter.json"
+         JSON_PP_REWEIGHTER_PATH: "$NUSYST_DATA_DIR/ValenciaExc2p2hReweighter/ICARUS_BNB_numu_C12_SuSAv2_to_ValenciaExclusive_2p2h_pp_bdtreweighter.json"
+         SCALE_FACTOR_PN: 1.68629999999999991012
+         SCALE_FACTOR_PP: 2.464199999999999946
+      }
+      tool_type: "ValenciaExc2p2hReweighter"
+   }
+   WSReweight_DUNE_v0: {
+      instance_name: "DUNE_v0"
+      nucleus_radius: {
+         centralParamValue: 3.5299999999999998046
+         isSplineable: true
+         paramVariations: [
+            2.5,
+            3,
+            3.5299999999999998046,
+            4,
+            4.5
+         ]
+         prettyName: "nucleus_radius"
+         systParamId: 124
+      }
+      parameter_headers: [
+         "nucleus_radius",
+         "surface_thickness"
+      ]
+      surface_thickness: {
+         centralParamValue: 5.40000000000000035527e-1
+         isSplineable: true
+         paramVariations: [
+            4.50000000000000011102e-1,
+            5e-1,
+            5.40000000000000035527e-1,
+            5.89999999999999968914e-1,
+            6.40000000000000013323e-1
+         ]
+         prettyName: "surface_thickness"
+         systParamId: 125
+      }
+      tool_options: {
+         OPT_BOOL: false
+         OPT_STRING: ""
+         fill_valid_tree: false
+      }
+      tool_type: "WSReweight"
+   }
+   ZExpPCAWeighter_DUNE_v0: {
+      b1: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "b1"
+         systParamId: 52
+      }
+      b2: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "b2"
+         systParamId: 53
+      }
+      b3: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "b3"
+         systParamId: 54
+      }
+      b4: {
+         isSplineable: true
+         paramVariations: [
+            -3,
+            -2,
+            -1,
+            0,
+            1,
+            2,
+            3
+         ]
+         prettyName: "b4"
+         systParamId: 55
+      }
+      instance_name: "DUNE_v0"
+      parameter_headers: [
+         "b1",
+         "b2",
+         "b3",
+         "b4"
+      ]
+      tool_options: {
+         verbosity_level: 1
+      }
+      tool_type: "ZExpPCAWeighter"
+   }
+   syst_providers: [
+      "GENIEReWeight_DUNE_v0",
+      "ZExpPCAWeighter_DUNE_v0",
+      "CCQETemplateReweight_DUNE_v0_LFGToSF",
+      "CCQETemplateReweight_DUNE_v0_LFGToHF",
+      "CCQETemplateReweight_DUNE_v0_HFToCRPA",
+      "CCQEXSecCorr_DUNE_v0",
+      "QEInterference_DUNE_v0",
+      "MECq0q3InterpWeighting_SuSAv2ToValenica_q0binned_all",
+      "MECq0q3InterpWeighting_DUNE_v0_SuSAToMar",
+      "ValenciaExc2p2hReweighter_DUNE_v0",
+      "ResIso_DUNE_v0",
+      "PionAbsWeighter_DUNE_v0",
+      "WSReweight_DUNE_v0"
+   ]
+}
+

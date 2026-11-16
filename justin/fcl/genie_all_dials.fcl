@@ -3,6 +3,9 @@
 // UPS genie v3_04_02 / genie_xsec v3_04_00 AR2320i00000:
 //   GenerateAllDialsConfigNuSyst --mode genierw -o genie_all_dials.fcl
 // Regenerate the same way to change the dial list or the [-3..3] variation descriptor.
+// Then set UseFullHERG: true in every provider except GENIEReWeight_FSI: the generated
+// default (false) reconfigures GENIE per variation per event (~5.5 s/event instead of
+// ~50 ms, identical weights), while true breaks FormZone (weights stuck at 1).
 generated_systematic_provider_configuration: {
    GENIEReWeight_CCQE: {
       CCQEMomDistroFGtoSF: {
@@ -186,7 +189,7 @@ generated_systematic_provider_configuration: {
          DISBYIsShapeOnly: false
          MaCCQEIsShapeOnly: false
          NCRESIsShapeOnly: false
-         UseFullHERG: false
+         UseFullHERG: true
          applies_to_channels: [
             "CC_*_*_QE"
          ]
@@ -247,7 +250,7 @@ generated_systematic_provider_configuration: {
          DISBYIsShapeOnly: false
          MaCCQEIsShapeOnly: false
          NCRESIsShapeOnly: false
-         UseFullHERG: false
+         UseFullHERG: true
          applies_to_channels: [
             "CC_*_*_RES"
          ]
@@ -348,7 +351,7 @@ generated_systematic_provider_configuration: {
          DISBYIsShapeOnly: false
          MaCCQEIsShapeOnly: false
          NCRESIsShapeOnly: false
-         UseFullHERG: false
+         UseFullHERG: true
          applies_to_channels: [
             "*_*_*_COH"
          ]
@@ -489,7 +492,7 @@ generated_systematic_provider_configuration: {
          DISBYIsShapeOnly: false
          MaCCQEIsShapeOnly: false
          NCRESIsShapeOnly: false
-         UseFullHERG: false
+         UseFullHERG: true
          applies_to_channels: [
             "*_*_*_DIS"
          ]
@@ -860,7 +863,7 @@ generated_systematic_provider_configuration: {
          DISBYIsShapeOnly: false
          MaCCQEIsShapeOnly: false
          NCRESIsShapeOnly: false
-         UseFullHERG: false
+         UseFullHERG: true
          applies_to_channels: [
             "*_*_*_MEC"
          ]
@@ -921,7 +924,7 @@ generated_systematic_provider_configuration: {
          DISBYIsShapeOnly: false
          MaCCQEIsShapeOnly: false
          NCRESIsShapeOnly: false
-         UseFullHERG: false
+         UseFullHERG: true
          applies_to_channels: [
             "NC_*_*_QE"
          ]
@@ -982,7 +985,7 @@ generated_systematic_provider_configuration: {
          DISBYIsShapeOnly: false
          MaCCQEIsShapeOnly: false
          NCRESIsShapeOnly: false
-         UseFullHERG: false
+         UseFullHERG: true
          applies_to_channels: [
             "NC_*_*_RES"
          ]
@@ -1075,7 +1078,7 @@ generated_systematic_provider_configuration: {
          DISBYIsShapeOnly: false
          MaCCQEIsShapeOnly: false
          NCRESIsShapeOnly: false
-         UseFullHERG: false
+         UseFullHERG: true
          applies_to_channels: [
             "*_*_*_RES"
          ]
@@ -1416,7 +1419,7 @@ generated_systematic_provider_configuration: {
          DISBYIsShapeOnly: false
          MaCCQEIsShapeOnly: false
          NCRESIsShapeOnly: false
-         UseFullHERG: false
+         UseFullHERG: true
          applies_to_channels: [
             "*_*_*_RES",
             "*_*_*_DIS"

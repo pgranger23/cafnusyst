@@ -25,6 +25,7 @@ setup sbndata v01_10
 export PATH="${BASE_DIR}/bin:${PATH}"
 export LD_LIBRARY_PATH="${BASE_DIR}/lib:${LD_LIBRARY_PATH}"
 export FHICL_FILE_PATH=".:${BASE_DIR}/fcl:${BASE_DIR}/mec_data:${FHICL_FILE_PATH}"
+export NUSYST_DATA_DIR="${BASE_DIR}/nusyst_data"
 
 # 3. Custom CC-MEC Hadron Tensors & Splines (if present in package)
 if [ -d "${BASE_DIR}/mec_data/genie_config" ]; then

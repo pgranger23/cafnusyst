@@ -109,6 +109,33 @@ if [ -d "${CODEDIR}/genie_config" ]; then
     cp -a "${CODEDIR}/genie_config" "${PKG_DIR}/mec_data/"
 fi
 
+# Data read by the non-GENIE providers through ${NUSYST_DATA_DIR} (DUNE v0 config),
+# from a pinned NuSystematics/nusyst_data release. QEFix is 5.5 GB there; its
+# h_weights_map histograms are identical to sbndata's QE-Fix, so link that instead.
+NUSYST_DATA_REPO="https://github.com/NuSystematics/nusyst_data"
+NUSYST_DATA_TAG="v01_00_00"
+mkdir -p "${PKG_DIR}/nusyst_data/ValenciaExc2p2hReweighter"
+while read -r asset sha; do
+    curl -sSfL -o "${PKG_DIR}/${asset}.tar.gz" "${NUSYST_DATA_REPO}/releases/download/${NUSYST_DATA_TAG}/${asset}.tar.gz"
+    echo "${sha}  ${PKG_DIR}/${asset}.tar.gz" | sha256sum -c --quiet -
+    mkdir -p "${PKG_DIR}/nusyst_data/${asset}"
+    tar -xzf "${PKG_DIR}/${asset}.tar.gz" -C "${PKG_DIR}/nusyst_data/${asset}"
+    rm -f "${PKG_DIR}/${asset}.tar.gz"
+done <<'EOF'
+CCQEReweight d40bdca7af2740f84cf40c7aa6274bb11eeb916926d8017caee86703a72cfcbe
+CCMEC_template b42a93cf49bc911b4662474aba380ea0355b0d62af2546877f445ff609a196e0
+QEInterference d67e52031913631ce8d22ef2016c680f197a53907f14a65ab9b2fbde1e888dcf
+EOF
+while read -r json sha; do
+    f="${PKG_DIR}/nusyst_data/ValenciaExc2p2hReweighter/${json}"
+    curl -sSfL -o "$f" "https://raw.githubusercontent.com/NuSystematics/nusyst_data/${NUSYST_DATA_TAG}/ValenciaExc2p2hReweighter/${json}"
+    echo "${sha}  ${f}" | sha256sum -c --quiet -
+done <<'EOF'
+ICARUS_BNB_numu_C12_SuSAv2_to_ValenciaExclusive_2p2h_pn_bdtreweighter.json 93fb3db4ab57cda32673b52f78ce2a848ddf4f5a9d317c113fb469b4c543cc07
+ICARUS_BNB_numu_C12_SuSAv2_to_ValenciaExclusive_2p2h_pp_bdtreweighter.json 5e8351fd8bbd7c54b6fa8504bfdbb37fdc8f0483dc96173ba371222005a7cb94
+EOF
+ln -s /cvmfs/sbn.opensciencegrid.org/products/sbn/sbndata/v01_10/systematics/AR23Plus/QE-Fix "${PKG_DIR}/nusyst_data/QEFix"
+
 # FHiCL configurations and runtime setup
 cp -a "${SCRIPT_DIR}/fcl/"*.fcl "${PKG_DIR}/fcl/"
 cp -a "${SCRIPT_DIR}/setup_runtime.sh" "${PKG_DIR}/setup_runtime.sh"

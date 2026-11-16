@@ -1,0 +1,565 @@
+# GENIE Reweight
+GENIE_ToolConfig:
+
+  tool_type: "GENIEReWeight"
+
+  instance_name: DUNE_v0
+
+  # Keep one GENIEReWeight instance per discrete dial tweak in memory
+  # Requires no reconfigures within the event loop
+  UseFullHERG: true
+
+  ignore_parameter_dependence: true
+
+  ################################## CCQE Parameters
+
+  # Adjust coefficients in the z-expansion parameterization
+  # of the CCQE axial-vector form factor
+
+  ZExpA1CCQE_central_value: 0
+  ZExpA1CCQE_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ZExpA2CCQE_central_value: 0
+  ZExpA2CCQE_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ZExpA3CCQE_central_value: 0
+  ZExpA3CCQE_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ZExpA4CCQE_central_value: 0
+  ZExpA4CCQE_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # This dial provides the ability to scale the CCQE cross section
+  # normalization by a constant factor while using the z-expansion
+  # for the axial-vector form factor. However, since varying the
+  # coefficients for the individual terms (as is done above) also
+  # impacts the normalization, this one is left out for now.
+  #
+  #ZNormCCQE_central_value: 0
+  #ZNormCCQE_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # Assesses a shape-only variation of the CCQE cross section by
+  # switching the parameterization of the vector form factors
+  # from BBBA07 (default for the AR23_20i_00_000 model set) to
+  # a dipole (VecFFCCQEshape = 1).
+  #
+  VecFFCCQEshape_central_value: 0
+  VecFFCCQEshape_variation_descriptor: "[0, 1]"
+
+  # GENIE Reweight provides a similar dial for doing a shape-only
+  # systematic variation that switches from a dipole axial-vector
+  # form factor (AxFFCCQEshape = 0) to the z-expansion parameterization
+  # (AxFFCCQEshape = 1). However, the weight calculator does not yet
+  # support going in the other direction (z-exp to dipole). This dial
+  # is thus currently excluded as incompatible with our AR23_20i_00_000
+  # base model set.
+  #AxFFCCQEshape_central_value : 0
+  #AxFFCCQEshape_variation_descriptor: "[1.0]"
+
+  # The weight calculator for adjusting the Fermi momentum kF has always
+  # been a bit of a hack. You can zero out some events by increasing
+  # kF, but you can't create new ones by reducing kF. I'd recommend
+  # revisiting these nuclear model uncertainties in light of the
+  # spectral-function-like version of the correlated Fermi gas model
+  # that we're using in AR23_20i_00_000. I will therefore exclude this
+  # dial for now.
+  #CCQEPauliSupViaKF_central_value: 0
+  #CCQEPauliSupViaKF_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # This weight calculator assumes use of the Bodek-Ritchie global Fermi gas
+  # (in, e.g., the G18_02a_00_000 model set) and reweights the nucleon
+  # momentum distribution to a spectral function (as implemented in
+  # genie::SpectralFunc) as a variation (CCQEMomDistroFGtoSF = 1). This dial
+  # has multiple issues for us. First, we use a modified version of GENIE's
+  # correlated Fermi gas model, which differs substantially from the
+  # Bodek-Ritchie global Fermi gas. Second, genie::SpectralFunc does not yet
+  # support an argon target nucleus. Rather than try to hack this dial to be
+  # compatible with our model set, I will exclude it and recommend that we
+  # use a different strategy for assessing systematics on the GENIE model of
+  # the nuclear ground state.
+  #CCQEMomDistroFGtoSF_central_value: 0
+  #CCQEMomDistroFGtoSF_variation_descriptor: "[1.0]"
+
+  # This dial varies the strength of the RPA corrections that are applied in
+  # the Valencia CCQE model. The implementation was contributed to GENIE by
+  # MicroBooNE and is documented in Phys. Rev. D 105, 072001 (2022).
+  RPA_CCQE_central_value: 0
+  RPA_CCQE_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # This dial varies the strength of the electromagnetic potential used by
+  # the Valencia CCQE model to apply Coulomb corrections to the cross
+  # section. The implementation was contributed to GENIE by MicroBooNE and is
+  # documented in Phys. Rev. D 105, 072001 (2022).
+  CoulombCCQE_central_value: 0
+  CoulombCCQE_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ################################## NCEl Parameters
+
+  MaNCEL_central_value: 0
+  MaNCEL_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  EtaNCEL_central_value: 0
+  EtaNCEL_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ################################## MEC Parameters
+
+  # Constant scaling factor for the CCMEC total cross section
+  NormCCMEC_central_value: 0
+  NormCCMEC_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # Constant scaling factor for the NCMEC total cross section
+  NormNCMEC_central_value: 0
+  NormNCMEC_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # This dial performs a shape-only transformation of the differential cross
+  # section in lepton kinematics between the Valencia model (XSecShape_CCMEC
+  # = 0) and the GENIE Empirical model (XSecShape_CCMEC = 1). The GENIE
+  # weight calculator could be adapted to be compatible with the SuSAv2 CCMEC
+  # model used in AR23_20i_00_000, but GENIE code changes are required that
+  # are not finished yet. For now, I disable this weight calculator. Further
+  # details are given in Phys. Rev. D 105, 072001 (2022).
+  #XSecShape_CCMEC_central_value: 0
+  #XSecShape_CCMEC_variation_descriptor: "[1.0]"
+
+  # Adjusts the angular distribution when decaying a two-nucleon cluster
+  # into two final-state nucleons.
+  # DecayAngMEC = 0 gives the default isotropic angular distribution
+  # DecayAngMEC = 1 gives an alternative distribution proportional to
+  # cos^2(theta). See also Phys. Rev. D 105, 072001 (2022).
+  DecayAngMEC_central_value: 0
+  DecayAngMEC_variation_descriptor: "[0, 1]"
+
+  # Adjusts the fractional contribution of initial-state pn pairs to the
+  # total CCMEC cross section. This weight calculator is not yet compatible
+  # with the SuSAv2 CCMEC model used in AR23_20i_00_000, so I disable
+  # it for now.
+  #FracPN_CCMEC_central_value: 0
+  #FracPN_CCMEC_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # Adjusts the fractional contribution of diagrams involving an internal
+  # Delta line to the total CCMEC cross section. The Valencia CCMEC model
+  # includes information to calculate this contribution, but SuSAv2 does not.
+  # Since we use SuSAv2 as the CCMEC model in AR23_20i_00_000, I disable this
+  # dial for now.
+  #FracDelta_CCMEC_central_value: 0
+  #FracDelta_CCMEC_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ################################## RES Parameters
+  ################# CCRES
+
+  CCRESIsShapeOnly: false
+
+  MaCCRES_central_value: 0
+  MaCCRES_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  MvCCRES_central_value: 0
+  MvCCRES_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ################# NCRES
+
+  NCRESIsShapeOnly: false
+
+  MaNCRES_central_value: 0
+  MaNCRES_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  MvNCRES_central_value: 0
+  MvNCRES_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ################# Non-RES
+
+  # nu+p, CC
+
+  NonRESBGvpCC1pi_central_value: 0
+  NonRESBGvpCC1pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  NonRESBGvpCC2pi_central_value: 0
+  NonRESBGvpCC2pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # nu+p, NC
+
+  NonRESBGvpNC1pi_central_value: 0
+  NonRESBGvpNC1pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  NonRESBGvpNC2pi_central_value: 0
+  NonRESBGvpNC2pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # nu+n, CC
+
+  NonRESBGvnCC1pi_central_value: 0
+  NonRESBGvnCC1pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  NonRESBGvnCC2pi_central_value: 0
+  NonRESBGvnCC2pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # nu+n, NC
+
+  NonRESBGvnNC1pi_central_value: 0
+  NonRESBGvnNC1pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  NonRESBGvnNC2pi_central_value: 0
+  NonRESBGvnNC2pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # nubar+p, CC
+
+  NonRESBGvbarpCC1pi_central_value: 0
+  NonRESBGvbarpCC1pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  NonRESBGvbarpCC2pi_central_value: 0
+  NonRESBGvbarpCC2pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # nubar+p, NC
+
+  NonRESBGvbarpNC1pi_central_value: 0
+  NonRESBGvbarpNC1pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  NonRESBGvbarpNC2pi_central_value: 0
+  NonRESBGvbarpNC2pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # nubar+n, CC
+
+  NonRESBGvbarnCC1pi_central_value: 0
+  NonRESBGvbarnCC1pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  NonRESBGvbarnCC2pi_central_value: 0
+  NonRESBGvbarnCC2pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # nubar+n, NC
+
+  NonRESBGvbarnNC1pi_central_value: 0
+  NonRESBGvbarnNC1pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  NonRESBGvbarnNC2pi_central_value: 0
+  NonRESBGvbarnNC2pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ################# Other
+
+  RDecBR1gamma_central_value: 0
+  RDecBR1gamma_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  RDecBR1eta_central_value: 0
+  RDecBR1eta_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # Pion angular distibution in Delta -> pi N decays
+  # Theta_Delta2Npi = 0 gives the Rein-Sehgal angular distribution
+  # Theta_Delta2Npi = 1 gives an isotropic angular distribution
+  Theta_Delta2Npi_central_value: 0
+  Theta_Delta2Npi_variation_descriptor: "[0, 1]"
+
+  # Photon angular distribution in Delta -> photon N decays
+  # ThetaDelta2NRad = 0 gives the default isotropic angular distribution
+  # ThetaDelta2NRad = 1 gives an alternative distribution proportional to
+  # cos^2(theta). See also Phys. Rev. D 105, 072001 (2022).
+  ThetaDelta2NRad_central_value: 0
+  ThetaDelta2NRad_variation_descriptor: "[0, 1]"
+
+  ################################## COH Parameters
+
+  # The MaCOHpi and R0COHpi weight calculators are not compatible with the
+  # Berger-Sehgal coherent pion production model used in our AR23_20i_00_000
+  # GENIE model set. I disable them here and add simple normalization scaling
+  # factors used by MicroBooNE. Systematics on this channel are likely worth
+  # revisiting at some point.
+
+  # MaCOHpi_central_value: 0
+  # MaCOHpi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # R0COHpi_central_value: 0
+  # R0COHpi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  NormCCCOH_central_value: 0
+  NormCCCOH_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  NormNCCOH_central_value: 0
+  NormNCCOH_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ################################## DIS BY Parameters
+
+  AhtBY_central_value: 0
+  AhtBY_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  BhtBY_central_value: 0
+  BhtBY_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  CV1uBY_central_value: 0
+  CV1uBY_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  CV2uBY_central_value: 0
+  CV2uBY_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ################################## AGKY Hadronization Parameters
+
+  ## Disabled as they are very slow, will hopefully re-enable in the future
+  # AGKYxF1pi_central_value: 0
+  # AGKYxF1pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+  #
+  # AGKYpT1pi_central_value: 0
+  # AGKYpT1pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ################################## FZone Parameters
+
+  # The formation zone weight calculator is broken in GENIE v3 and
+  # still needs to be fixed. I exclude it for now.
+  #FormZone_central_value: 0
+  #FormZone_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  ################################## FSI Parameters
+
+  MFP_pi_central_value: 0
+  MFP_pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  FrCEx_pi_central_value: 0
+  FrCEx_pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # The elastic FSI fate was removed in hA2018, so I disable the
+  # associated weight calculators
+  #FrElas_pi_central_value: 0
+  #FrElas_pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  FrInel_pi_central_value: 0
+  FrInel_pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  FrAbs_pi_central_value: 0
+  FrAbs_pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  FrPiProd_pi_central_value: 0
+  FrPiProd_pi_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  MFP_N_central_value: 0
+  MFP_N_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  FrCEx_N_central_value: 0
+  FrCEx_N_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  # The elastic FSI fate was removed in hA2018, so I disable the
+  # associated weight calculators
+  #FrElas_N_central_value: 0
+  #FrElas_N_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  FrInel_N_central_value: 0
+  FrInel_N_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  FrAbs_N_central_value: 0
+  FrAbs_N_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+  FrPiProd_N_central_value: 0
+  FrPiProd_N_variation_descriptor: "[-3, -2, -1, 0, 1, 2, 3]"
+
+# CCQE, Z-exp, PCA (deuterium)
+zexpansion_weighter_ToolConfig:
+  b1_variation_descriptor: (-3,3,1)
+  b2_variation_descriptor: (-3,3,1)
+  b3_variation_descriptor: (-3,3,1)
+  b4_variation_descriptor: (-3,3,1)
+  instance_name: DUNE_v0
+  tool_type: ZExpPCAWeighter
+  verbosity_level: 1
+
+# AR23+
+# - CCQE, Assuming CV is already correct to MINERvA FA, LFG-to-SF
+CCQETemplateSF_ToolConfig:
+  CCQETemplateReweight_input_manifest:
+    ENuBoundary: 1
+    RWMode: q3q0
+    input_file: ${NUSYST_DATA_DIR}/CCQEReweight/CCQEReweight_templates_all_tunes.root
+    baseline_tune: AR23_20i_01_000
+    target_tune: AR25_20i_01_000
+  instance_name: DUNE_v0_LFGToSF
+  q0_bin_edges: [0.0, 0.05, 0.10, 0.20, 0.7, 10.0]
+  q0bin0_central_value: 0
+  q0bin0_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  q0bin1_central_value: 0
+  q0bin1_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  q0bin2_central_value: 0
+  q0bin2_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  q0bin3_central_value: 0
+  q0bin3_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  q0bin4_central_value: 0
+  q0bin4_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  tool_type: CCQETemplateReweight
+# - CCQE, Assuming CV is already correct to MINERvA FA, LFG-to-HF
+CCQETemplateHF_ToolConfig:
+  CCQETemplateReweight_input_manifest:
+    ENuBoundary: 1
+    RWMode: q3q0
+    input_file: ${NUSYST_DATA_DIR}/CCQEReweight/CCQEReweight_templates_all_tunes.root
+    baseline_tune: AR23_20i_01_000
+    target_tune: G21_12a_00_000
+  instance_name: DUNE_v0_LFGToHF
+  q0_bin_edges: [0.0, 0.05, 0.10, 0.20, 0.7, 10.0]
+  q0bin0_central_value: 0
+  q0bin0_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  q0bin1_central_value: 0
+  q0bin1_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  q0bin2_central_value: 0
+  q0bin2_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  q0bin3_central_value: 0
+  q0bin3_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  q0bin4_central_value: 0
+  q0bin4_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  tool_type: CCQETemplateReweight
+# - CCQE, Assuming CV is already correct to MINERvA FA, HF-to-CRPA
+CCQETemplateCRPA_ToolConfig:
+  CCQETemplateReweight_input_manifest:
+    ENuBoundary: 1
+    RWMode: q3q0
+    input_file: ${NUSYST_DATA_DIR}/CCQEReweight/CCQEReweight_templates_all_tunes.root
+    baseline_tune: G21_12a_00_000
+    target_tune: G21_13a_00_000
+  instance_name: DUNE_v0_HFToCRPA
+  q0_bin_edges: [0.0, 0.05, 0.10, 0.20, 0.7, 10.0]
+  q0bin0_central_value: 0
+  q0bin0_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  q0bin1_central_value: 0
+  q0bin1_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  q0bin2_central_value: 0
+  q0bin2_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  q0bin3_central_value: 0
+  q0bin3_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  q0bin4_central_value: 0
+  q0bin4_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  tool_type: CCQETemplateReweight
+# - CCQE bug-fix
+CCQEXSecCorr_ToolConfig:
+  CCQEXSecCorr_central_value: 1
+  CCQEXSecCorr_input_manifest:
+    DataBaseDir: $NUSYST_DATA_DIR/QEFix
+    EdgeClamp: true
+    EnergyGrid: [0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65,
+      0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.00, 1.05, 1.10, 1.15,
+      1.20, 1.25, 1.30, 1.35, 1.40, 1.45, 1.50, 1.55, 1.60, 1.65,
+      1.70, 1.75, 1.80, 1.85, 1.90, 1.95, 2.00, 2.05, 2.10, 2.15,
+      2.20, 2.25, 2.30, 2.35, 2.40, 2.45, 2.50, 2.55, 2.60, 2.65,
+      2.70, 2.75, 2.80, 2.85, 2.90, 2.95, 3.00]
+    EnuMax: 3.00
+    EnuMin: 0.20
+    EnuSnapTol: 0.005
+    UseNearestBin: true
+    WeightLimits: [0.0, 30.0]
+    file_pattern: reweight_data_v3_04_02a_to_v3_06_02_sbn2_CCQE_%FLAVOR%_%ENERGY%GeV_flat.root
+    histogram_name: h_weights_map
+  fill_valid_tree: false
+  instance_name: DUNE_v0
+  tool_type: CCQEXSecCorr
+# - QE interference term
+QEInterference_ToolConfig:
+  QEInterference_input_manifest:
+    input_file: ${NUSYST_DATA_DIR}/QEInterference/ACHILLES_weights.root
+    inputs: [{input_enu_bins: numu_cc_enu_bins, input_hist: numu_cc_weights, input_q0_bins: numu_cc_q0_bins, input_q3_bins: numu_cc_q3_bins, name: numu_cc}, {input_enu_bins: nue_cc_enu_bins, input_hist: nue_cc_weights, input_q0_bins: nue_cc_q0_bins, input_q3_bins: nue_cc_q3_bins, name: nue_cc}, {input_enu_bins: numu_nc_enu_bins, input_hist: numu_nc_weights, input_q0_bins: numu_nc_q0_bins, input_q3_bins: numu_nc_q3_bins, name: numu_nc}, {input_enu_bins: nue_nc_enu_bins, input_hist: nue_nc_weights, input_q0_bins: nue_nc_q0_bins, input_q3_bins: nue_nc_q3_bins, name: nue_nc}]
+  QEIntf_dial_0_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  QEIntf_dial_1_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  QEIntf_dial_2_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  QEIntf_dial_3_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  QEIntf_dial_4_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  QEIntf_dial_5_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  instance_name: DUNE_v0
+  q0_bin_edges: [0.0, 0.25, 0.5, 0.75, 1.0, 2.0, 3.0]
+  tool_type: QEInterference
+  verbosity_level: 5
+# - MEC, SuSAv2-to-Valencia(inclusive) 
+SuSAv2ToValencia_MECInterp_q0binned_ToolConfig:
+  MECResponse_input_manifest:
+    EdgeClamp: true
+    EnuMax: 3.0
+    EnuMin: 0.20
+    EnuSnapTol: 0.005
+    Flavors: [numu, numubar, nue, nuebar]
+    Model: valencia
+    OutOfRangeWeight: 0.0
+    Q0ApplyMax: 1.2
+    Q0ApplyMin: 0.0
+    Q0Bins: [0.0, 0.2, 0.4, 0.6, 10.0]
+    Q3ApplyMax: 1.2
+    Q3ApplyMin: 0.0
+    UseNearestBin: false
+    WeightLimits: [0.1, 1000.0]
+    WeightMapFile3D: ${NUSYST_DATA_DIR}/CCMEC_template/ccmec_weight_maps_3d_q0_q3_Enu_all_flavors_valencia_martini.root
+  MECResponse_q0bin0_central_value: 0
+  MECResponse_q0bin0_variation_descriptor: "[1]"
+  MECResponse_q0bin1_central_value: 0
+  MECResponse_q0bin1_variation_descriptor: "[1]"
+  MECResponse_q0bin2_central_value: 0
+  MECResponse_q0bin2_variation_descriptor: "[1]"
+  MECResponse_q0bin3_central_value: 0
+  MECResponse_q0bin3_variation_descriptor: "[1]"
+  instance_name: SuSAv2ToValenica_q0binned_all
+  tool_type: MECq0q3InterpWeighting
+# - MEC, SuSAv2-to-Martini
+SuSAv2ToMartini_MECInterp_q0binned_ToolConfig:
+  MECResponse_input_manifest:
+    EdgeClamp: true
+    EnuMax: 3.0
+    EnuMin: 0.20
+    EnuSnapTol: 0.005
+    Flavors: [numu, numubar, nue, nuebar]
+    Model: martini
+    OutOfRangeWeight: 0.0
+    Q0ApplyMax: 0.995
+    Q0ApplyMin: 0.0
+    Q0Bins: [0.0, 0.2, 0.4, 0.6, 10.0]
+    Q3ApplyMax: 2.0
+    Q3ApplyMin: 0.0
+    UseNearestBin: false
+    WeightLimits: [0.1, 1000.0]
+    WeightMapFile3D: ${NUSYST_DATA_DIR}/CCMEC_template/ccmec_weight_maps_3d_q0_q3_Enu_all_flavors_valencia_martini.root
+  MECResponse_q0bin0_central_value: 0
+  MECResponse_q0bin0_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  MECResponse_q0bin1_central_value: 0
+  MECResponse_q0bin1_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  MECResponse_q0bin2_central_value: 0
+  MECResponse_q0bin2_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  MECResponse_q0bin3_central_value: 0
+  MECResponse_q0bin3_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  instance_name: DUNE_v0_SuSAToMar
+  tool_type: MECq0q3InterpWeighting
+# Valencia exlcusive 2p2h
+ValenciaExc2p2hReweighter_ToolConfig:
+  DialValencia_central_value: 0
+  DialValencia_variation_descriptor: "[0.0, 1.0]"
+  JSON_PN_REWEIGHTER_PATH: $NUSYST_DATA_DIR/ValenciaExc2p2hReweighter/ICARUS_BNB_numu_C12_SuSAv2_to_ValenciaExclusive_2p2h_pn_bdtreweighter.json
+  JSON_PP_REWEIGHTER_PATH: $NUSYST_DATA_DIR/ValenciaExc2p2hReweighter/ICARUS_BNB_numu_C12_SuSAv2_to_ValenciaExclusive_2p2h_pp_bdtreweighter.json
+  SCALE_FACTOR_PN: 1.6863
+  SCALE_FACTOR_PP: 2.4642
+  instance_name: DUNE_v0
+  tool_type: ValenciaExc2p2hReweighter
+# - Res, for each mode
+ResIso_ToolConfig:
+  alldial_variation_descriptor: (-3,3,1)
+  instance_name: DUNE_v0
+  tool_type: ResIso
+  verbosity_level: 1
+# - FSI PionAbs
+PionAbsProvider_ToolConfig:
+  PionAbs_input_manifest:
+    input_file: ""
+    inputs: []
+  QuasiDeuteronFraction_variation_descriptor: "[+1,-1,+2,-2,+3,-3]"
+  instance_name: DUNE_v0
+  tool_type: PionAbsWeighter
+  verbosity_level: 5
+# - WS
+WSReweight_ToolConfig:
+  OPT_BOOL: false
+  OPT_STRING: ""
+  estimate_emiss: false
+  fill_valid_tree: false
+  instance_name: DUNE_v0
+  nucleus_radius_central_value: 3.53
+  nucleus_radius_variation_descriptor: "[2.5, 3, 3.53, 4, 4.5]"
+  surface_thickness_central_value: 0.54
+  surface_thickness_variation_descriptor: "[0.45, 0.50, 0.54, 0.59, 0.64]"
+  tool_type: WSReweight
+
+syst_providers: 
+  - GENIE_ToolConfig
+  - zexpansion_weighter_ToolConfig
+  - CCQETemplateSF_ToolConfig
+  - CCQETemplateHF_ToolConfig
+  - CCQETemplateCRPA_ToolConfig
+  - CCQEXSecCorr_ToolConfig
+  - QEInterference_ToolConfig
+  - SuSAv2ToValencia_MECInterp_q0binned_ToolConfig
+  - SuSAv2ToMartini_MECInterp_q0binned_ToolConfig
+  - ValenciaExc2p2hReweighter_ToolConfig
+  - ResIso_ToolConfig
+  - PionAbsProvider_ToolConfig
+  - WSReweight_ToolConfig
+
